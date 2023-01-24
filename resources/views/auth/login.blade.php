@@ -9,19 +9,19 @@
                     <div class="row no-gutters">
                         <div class="col-xl-12">
                             <div class="auth-form">
-                                <h2 class="text-center mb-3"> <span class="fa fa-home" style="font-size:60px;"></span> Property Manager</h2>
+                                <h2 class="text-center mb-3"> <span class="fa fa-graduation-cap" style="font-size:60px;"></span> School Manager</h2>
+                                <h4 class="text-center mb-4"> <span class="fa fa-key"></span> Sign in</h4>
                                 @include('includes.dashboard-return-msg')
                                 <x-errors/>
-                                <h4 class="text-center mb-4">Sign in your account</h4>
                                 <form action="{{route('login')}}" method="POST">
                                     @csrf
                                     <div class="form-group">
-                                        <label><strong>Email</strong></label>
-                                        <input type="email" class="form-control" name="email" placeholder="hello@example.com">
+                                        <label><strong>UserName/Email</strong></label>
+                                        <input type="text" class="form-control" name="username" placeholder="">
                                     </div>
                                     <div class="form-group">
                                         <label><strong>Password</strong></label>
-                                        <input type="password" class="form-control" name="password" placeholder="Password">
+                                        <input type="password" class="form-control" name="password" placeholder="****">
                                     </div>
                                     <div class="form-row d-flex justify-content-between mt-4 mb-2">
                                         <div class="form-group">
@@ -31,16 +31,14 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <a href="{{route('forgotPwd')}}">Forgot Password?</a>
+                                            <a href="#">Forgot Password?</a>
                                         </div>
                                     </div>
                                     <div class="text-center">
                                         <button type="submit" class="btn btn-primary">Sign me in</button>
                                     </div>
                                 </form>
-                                {{-- <div class=" text-center new-account mt-3">
-                                    <p>Don't have an account? <a class="text-primary" href="{{route('register')}}">Sign up</a></p>
-                                </div> --}}
+                                
                             </div>
                         </div>
                     </div>

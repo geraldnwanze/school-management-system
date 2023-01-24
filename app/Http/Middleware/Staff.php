@@ -2,8 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class Staff
 {
@@ -16,6 +18,9 @@ class Staff
      */
     public function handle(Request $request, Closure $next)
     {
-        return $next($request);
+        if(Auth::user()->userRole() === User::STAFF){
+            return $next($request);
+        }
+        abort(403);
     }
 }

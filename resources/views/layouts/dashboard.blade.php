@@ -1,16 +1,5 @@
 <?php
-    use App\Models\AssignModuleToRole;
-    use App\Models\Submodule;
     use App\Models\User;
-    use Illuminate\Http\Request;
-    $userRole = auth()->user()->loggedRole();
-                        
-    if ($userRole) {
-        $assignedModule = AssignModuleToRole::where('role_id', $userRole)
-                            ->with('module')
-                            ->groupBy('module_id')
-                            ->get();
-    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -125,64 +114,92 @@
 
                     <li>
                         <h4 style="color:azure;">
-                            {{ auth()->user()->role->rolename }}
+                            {{-- {{ auth()->user()->role->rolename }} --}}
                         </h4>
                     </li>
 
                     <li>
-                        <a class="" href="{{ route('myDashboard') }}" aria-expanded="false"><i
+                        <a class="" href="#" aria-expanded="false"><i
                                 class="fa fa-dashboard"></i><span class="nav-text">Dashboard</span></a>
                     </li>
-
-                    @foreach ($assignedModule as $a)
-                        <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-                                    class="fa fa-{{ $a->module->moduleSymbol }}"></i><span
-                                    class="nav-text">{{ ucfirst($a->module->moduleName) }}</span></a>
-                            <ul aria-expanded="false">
-                                <?php
-                                $assignedSubmodule = AssignModuleToRole::where('role_id', $userRole)
-                                    ->where('module_id', $a->module_id)
-                                    ->with('submodule')
-                                    ->get();
-                                ?>
-                                @foreach ($assignedSubmodule as $sm)
-                                    <li><a href="/{{$sm->submodule->route}}">{{ $sm->submodule->submoduleName }}</a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </li>
-                    @endforeach
-
-                    {{-- <li>
-                        <a class="" href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="nav-text">Users</span></a>
-                    </li> --}}
-                    {{-- @if(auth()->user()->loggedRole() === User::SUPER_ADMIN || auth()->user()->loggedRole() === User::ADMIN)
-                        <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-                                    class="fa fa-gear"></i><span class="nav-text">User Management</span></a>
-                            <ul aria-expanded="false">
-                                <li><a href="{{ route('users') }}">Users</a></li>
-                                <li><a href="{{route('register')}}">Create user</a></li>
-                            </ul>
-                        </li>
-                    @endif --}}
                     
-                    @if(auth()->user()->loggedRole() === User::SUPER_ADMIN)
+                    @if(Auth::user()->userRole() === User::SUPER_ADMIN)
+                    <li>
+                        <a class="" href="#" aria-expanded="false"><i
+                                class="fa fa-edit"></i><span class="nav-text">Create Class</span></a>
+                    </li>
+                    
+                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
+                                class="fa fa-user"></i><span class="nav-text">Create User</span></a>
+                        <ul aria-expanded="false">
+                            <li><a href="#">Admin</a></li>
+                            <li><a href="#">Staff</a></li>
+                            <li><a href="#">Student</a></li>
+                        </ul>
+                    </li>
+
+                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
+                        class="fa fa-book"></i><span class="nav-text">Subject</span></a>
+                        <ul aria-expanded="false">
+                            <li><a href="#">Create Subject</a></li>
+                            <li><a href="#">Assign Subject</a></li>
+                        </ul>
+                    </li>
+                    @endif
+
+                    @if(Auth::user()->userRole() === User::ADMIN)
+                        <li>
+                            <a class="" href="#" aria-expanded="false"><i
+                                    class="fa fa-edit"></i><span class="nav-text">Create Class</span></a>
+                        </li>
+                        
                         <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-                                    class="fa fa-gears"></i><span class="nav-text">Role Management</span></a>
+                                    class="fa fa-gears"></i><span class="nav-text">Create User</span></a>
                             <ul aria-expanded="false">
-                                <li><a href="{{ route('roles') }}">Roles</a></li>
-                                <li><a href="{{ route('modules') }}">Modules</a></li>
-                                <li><a href="{{ route('submodules') }}">Sub Modules</a></li>
-                                <li><a href="{{ route('assignRoleToUser') }}">Assign User Role</a></li>
-                                <li><a href="{{ route('assignModuleToRole') }}">Assign Module to Role</a></li>
+                                <li><a href="#">Staff</a></li>
+                                <li><a href="#">Student</a></li>
                             </ul>
+                        </li>
+
+                        <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
+                            class="fa fa-gears"></i><span class="nav-text">Subject</span></a>
+                            <ul aria-expanded="false">
+                                <li><a href="#">Create Subject</a></li>
+                                <li><a href="#">Assign Subject</a></li>
+                            </ul>
+                        </li>
+                    @endif
+
+                    @if(Auth::user()->userRole() === User::STAFF)
+                        <li>
+                            <a class="" href="#" aria-expanded="false"><i
+                                    class="fa fa-user"></i><span class="nav-text">Staff Profile</span></a>
+                        </li>
+                        <li>
+                            <a class="" href="#" aria-expanded="false"><i
+                                    class="fa fa-list"></i><span class="nav-text">View Subjects</span></a>
+                        </li>
+                        <li>
+                            <a class="" href="#" aria-expanded="false"><i
+                                    class="fa fa-edit"></i><span class="nav-text">Enter Result</span></a>
+                        </li>
+                    @endif
+
+                    @if(Auth::user()->userRole() === User::STUDENT)
+                        <li>
+                            <a class="" href="#" aria-expanded="false"><i
+                                    class="fa fa-user"></i><span class="nav-text">Student Profile</span></a>
+                        </li>
+                        <li>
+                            <a class="" href="#" aria-expanded="false"><i
+                                    class="fa fa-list"></i><span class="nav-text">Check Result</span></a>
                         </li>
                     @endif
 
                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                         class="fa fa-wrench"></i><span class="nav-text">Settings</span></a>
                         <ul aria-expanded="false">
-                            <li><a href="{{route('settings', auth()->user()->id)}}">Password</a></li>
+                            <li><a href="#">Password</a></li>
                         </ul>
                     </li>
 
@@ -195,14 +212,6 @@
 
         <div class="content-body">
             <div class="container-fluid">
-                @if(User::getRandomPwd())
-                    <div class="alert alert-warning alert-sm solid alert-right-icon alert-dismissible fade show blink">
-                        <span><i class="mdi mdi-alert"></i></span>
-                        <button type="button" class="close h-100" data-dismiss="alert" aria-label="Close"><span><i class="mdi mdi-close"></i></span>
-                        </button>
-                        <strong>Warning!</strong> Please reset your default password.
-                    </div>
-                @endif
                 @yield('content')
             </div>
         </div>
