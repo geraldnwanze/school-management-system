@@ -17,25 +17,29 @@ class RoleSeeder extends Seeder
         $roles = [
             [
                 'name' => 'SuperAdmin',
+                'slug' => 'superadmin',
                 'description' => 'system super administrator'
             ],
             [
                 'name' => 'Admin',
+                'slug' => 'admin',
                 'description' => 'system admin'
             ],
             [
                 'name' => 'Staff',
+                'slug' => 'staff',
                 'description' => 'school teacher'
             ],
             [
                 'name' => 'Student',
+                'slug' => 'student',
                 'description' => 'student of school'
             ],
            
         ];
 
-        foreach ($roles as $role) {
-            Role::create($role);
+        for ($i = 0; $i < count($roles); $i++) {
+            Role::create($roles[$i]);
         }
     }
 }
