@@ -15,19 +15,17 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('role_id')->nullable();
-            $table->foreign('role_id')->references('id')->on('roles');
-            $table->integer('user_type')->nullable();
-            $table->string('surname');
-            $table->string('firstname');
-            $table->string('othername');
-            $table->string('username')->unique();
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->enum('role', ['SuperAdmin', 'Admin', 'Staff', 'Student'])->default('Student');
+            $table->string('username')->nullable()->index();
+            $table->string('email')->nullable()->index();
             $table->string('password');
-            $table->string('last_login');
-            $table->rememberToken();
+            $table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('updated_by');
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('created_by')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreign('updated_by')->references('id')->on('users')->cascadeOnDelete();
         });
     }
 
