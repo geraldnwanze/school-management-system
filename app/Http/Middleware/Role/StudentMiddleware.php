@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace App\Http\Middleware\Role;
 
 use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class Staff
+class StudentMiddleware
 {
     /**
      * Handle an incoming request.
@@ -18,9 +17,11 @@ class Staff
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::user()->userRole() === User::STAFF){
-            return $next($request);
+        if (auth()->check()) {
+            if (auth()->user()->role === User::STUDENT) {
+                return $next($request);
+            }
+            abort(403);
         }
-        abort(403);
     }
 }

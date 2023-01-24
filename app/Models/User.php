@@ -14,40 +14,22 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    public const SUPER_ADMIN = 'SuperAdmin';
+    public const ADMIN = 'Admin';
+    public const STAFF = 'Staff';
+    public const STUDENT = 'Student';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'role_id',
-        'surname',
-        'firstname',
-        'othername',
+        'role',
         'username',
         'email',
         'password',
-        'last_login',
-        'user_type'
-    ];
-
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
+        'last_login'
     ];
 
     public function setPasswordAttribute($password)
@@ -55,18 +37,4 @@ class User extends Authenticatable
         $this->attributes['password'] = Hash::make($password);
     }
 
-    public function role()
-    {
-        return $this->hasOne(Role::class);
-    }
-
-    public const SUPER_ADMIN = 1;
-    public const ADMIN = 2;
-    public const STAFF = 3;
-    public const STUDENT = 4;
-
-    public function userRole()
-    {
-        return Auth::user()->role_id;
-    }
 }
