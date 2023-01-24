@@ -18,7 +18,12 @@ Route::get('/', function () {
 });
 
 //website front end not authenticated users 
-Route::get('/', 'HomepageController@index')->name('homePage');
+Route::get('/', 'Home\HomepageController@index')->name('homePage');
+
+//authentication routes
+Route::get('/login', 'Auth\AuthController@login')->name('login');
+Route::post('/login', 'Auth\AuthController@userLogin');
+Route::post('/logout', 'Auth\AuthController@logout')->name('logout');
 
 //authenticated users
 Route::group([
@@ -55,13 +60,13 @@ Route::group([
         
     });
 
-    Route::group(['prefix' => 'students', 'as' => 'students.'], function () {
-        Route::get('/dashbord', 'Student\DashboardController@index');
+    Route::group(['prefix' => 'student', 'as' => 'students.'], function () {
+        Route::get('/dashboard', 'Student\DashboardController@index');
         Route::get('/check-result', 'Student\ResultController@checkResult');
     });
 
     Route::group(['prefix' => 'staff', 'as' => 'staffs.'], function () {
-        Route::get('/dashbord', 'Staff\DashboardController@index');
+        Route::get('/dashboard', 'Staff\DashboardController@index');
     });
 
 });
