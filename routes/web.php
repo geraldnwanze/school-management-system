@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -69,4 +70,18 @@ Route::group([
         Route::get('/dashboard', 'Staff\DashboardController@index');
     });
 
+});
+
+Route::group(['as' => 'auth.'], function () {
+    Route::view('login', 'auth.login')->name('login-page');
+    Route::post('login', [AuthController::class, 'login'])->name('login');
+});
+
+Route::group(['as' => 'dashboard.', 'middleware' => 'auth'], function () {
+    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+
+    Route::group(['as' => 'superadmin.', 'middleware' => 'superadmin'], function () {});
+    Route::group(['as' => 'admin.', 'middleware' => ['superadmin', 'admin']], function () {});
+    Route::group(['as' => 'staff.', 'middleware' => ['superadmin', 'staff']], function () {});
+    Route::group(['as' => 'student.', 'middleware' => ['superadmin', 'student']], function () {});
 });
