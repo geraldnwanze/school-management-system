@@ -15,10 +15,11 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->enum('role', ['SuperAdmin', 'Admin', 'Staff', 'Student'])->default('Student');
+            $table->enum('role', ['superadmin', 'admin', 'staff', 'student'])->default('Student');
             $table->string('username')->nullable()->index();
             $table->string('email')->nullable()->index();
             $table->string('password');
+            $table->boolean('active')->default(true);
             $table->unsignedBigInteger('created_by');
             $table->unsignedBigInteger('updated_by');
             $table->timestamps();

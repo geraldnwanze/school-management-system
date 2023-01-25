@@ -18,7 +18,7 @@ class StudentMiddleware
     public function handle(Request $request, Closure $next)
     {
         if (auth()->check()) {
-            if (auth()->user()->role === User::STUDENT) {
+            if (auth()->user()->role === User::STUDENT || auth()->user()->role === User::SUPER_ADMIN) {
                 return $next($request);
             }
             abort(403);

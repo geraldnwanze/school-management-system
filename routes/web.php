@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\StaffController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\SuperAdminController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -78,8 +82,16 @@ Route::group(['as' => 'auth.'], function () {
 Route::group(['as' => 'dashboard.', 'middleware' => 'auth'], function () {
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
-    Route::group(['as' => 'superadmin.', 'middleware' => 'superadmin'], function () {});
-    Route::group(['as' => 'admin.', 'middleware' => ['superadmin', 'admin']], function () {});
-    Route::group(['as' => 'staff.', 'middleware' => ['superadmin', 'staff']], function () {});
-    Route::group(['as' => 'student.', 'middleware' => ['superadmin', 'student']], function () {});
+    Route::group(['prefix' => 'superadmin', 'as' => 'superadmin.', 'middleware' => ['superadmin']], function () {
+        Route::get('/', [SuperAdminController::class, 'index'])->name('index');
+    });
+    Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']], function () {
+        Route::get('/', [AdminController::class, 'index'])->name('index');
+    });
+    Route::group(['prefix' => 'staff', 'as' => 'staff.', 'middleware' => ['staff']], function () {
+        Route::get('/', [StaffController::class, 'index'])->name('index');
+    });
+    Route::group(['prefix' => 'student', 'as' => 'student.', 'middleware' => ['student']], function () {
+        Route::get('/', [StudentController::class, 'index'])->name('index');
+    });
 });

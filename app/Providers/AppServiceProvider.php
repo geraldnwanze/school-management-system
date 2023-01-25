@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +25,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->loadHelpers();
+    }
+
+    public function loadHelpers()
+    {
+        if (file_exists(app_path().'/Helpers/Role.php')) {
+            require_once(app_path().'/Helpers/Role.php');
+        }
     }
 }

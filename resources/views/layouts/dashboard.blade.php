@@ -1,6 +1,3 @@
-<?php
-    use App\Models\User;
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -85,7 +82,7 @@
                         <ul class="navbar-nav header-right">
                             <li class="nav-item dropdown notification_dropdown">
                                 <div class="nav-link" role="button">
-                                    <form action="{{ route('logout') }}" method="post">
+                                    <form action="{{ route('dashboard.logout') }}" method="post">
                                         @csrf
                                         <button type="submit" class="btn btn-primary">LogOut</button>
                                     </form>
@@ -114,7 +111,7 @@
 
                     <li>
                         <h4 style="color:azure;">
-                            {{-- {{ auth()->user()->role->rolename }} --}}
+                            {{ auth()->user()->role }}
                         </h4>
                     </li>
 
@@ -123,7 +120,7 @@
                                 class="fa fa-dashboard"></i><span class="nav-text">Dashboard</span></a>
                     </li>
                     
-                    @if(Auth::user()->userRole() === User::SUPER_ADMIN)
+                    @if(superadmin())
                     <li>
                         <a class="" href="#" aria-expanded="false"><i
                                 class="fa fa-edit"></i><span class="nav-text">Create Class</span></a>
@@ -147,7 +144,7 @@
                     </li>
                     @endif
 
-                    @if(Auth::user()->userRole() === User::ADMIN)
+                    @if(admin())
                         <li>
                             <a class="" href="#" aria-expanded="false"><i
                                     class="fa fa-edit"></i><span class="nav-text">Create Class</span></a>
@@ -170,7 +167,7 @@
                         </li>
                     @endif
 
-                    @if(Auth::user()->userRole() === User::STAFF)
+                    @if(staff())
                         <li>
                             <a class="" href="#" aria-expanded="false"><i
                                     class="fa fa-user"></i><span class="nav-text">Staff Profile</span></a>
@@ -185,7 +182,7 @@
                         </li>
                     @endif
 
-                    @if(Auth::user()->userRole() === User::STUDENT)
+                    @if(student())
                         <li>
                             <a class="" href="#" aria-expanded="false"><i
                                     class="fa fa-user"></i><span class="nav-text">Student Profile</span></a>
