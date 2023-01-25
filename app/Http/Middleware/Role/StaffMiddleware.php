@@ -18,7 +18,7 @@ class StaffMiddleware
     public function handle(Request $request, Closure $next)
     {
         if (auth()->check()) {
-            if (auth()->user()->role === User::STAFF) {
+            if (auth()->user()->role === User::STAFF || auth()->user()->role === User::SUPER_ADMIN) {
                 return $next($request);
             }
             abort(403);

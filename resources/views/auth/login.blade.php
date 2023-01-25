@@ -13,11 +13,11 @@
                                 <h4 class="text-center mb-4"> <span class="fa fa-key"></span> Sign in</h4>
                                 @include('includes.dashboard-return-msg')
                                 <x-errors/>
-                                <form action="{{route('login')}}" method="POST">
+                                <form action="{{route('auth.login')}}" method="POST">
                                     @csrf
                                     <div class="form-group">
                                         <label><strong>UserName/Email</strong></label>
-                                        <input type="text" class="form-control" name="username" placeholder="">
+                                        <input type="text" class="form-control" name="username" placeholder="{{ old('username')}}">
                                     </div>
                                     <div class="form-group">
                                         <label><strong>Password</strong></label>
