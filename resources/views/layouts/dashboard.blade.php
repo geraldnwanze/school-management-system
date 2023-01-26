@@ -122,25 +122,24 @@
                     
                     @if(superadmin())
                     <li>
-                        <a class="" href="#" aria-expanded="false"><i
-                                class="fa fa-edit"></i><span class="nav-text">Create Class</span></a>
+                        <a class="" href="{{ route('dashboard.classes.index') }}" >
+                            <i class="fa fa-home"></i>
+                            <span class="nav-text">Classes</span>
+                        </a>
                     </li>
                     
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-                                class="fa fa-user"></i><span class="nav-text">Create User</span></a>
-                        <ul aria-expanded="false">
-                            <li><a href="#">Admin</a></li>
-                            <li><a href="#">Staff</a></li>
-                            <li><a href="#">Student</a></li>
-                        </ul>
+                    <li>
+                        <a href="#" >
+                            <i class="fa fa-users"></i>
+                            <span class="nav-text">Users</span>
+                        </a>
                     </li>
 
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-                        class="fa fa-book"></i><span class="nav-text">Subject</span></a>
-                        <ul aria-expanded="false">
-                            <li><a href="#">Create Subject</a></li>
-                            <li><a href="#">Assign Subject</a></li>
-                        </ul>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-book"></i>
+                            <span class="nav-text">Subjects</span>
+                        </a>
                     </li>
                     @endif
 
@@ -209,6 +208,7 @@
 
         <div class="content-body">
             <div class="container-fluid">
+                <x-alert />
                 @yield('content')
             </div>
         </div>

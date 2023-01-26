@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreClassRoomRequest extends FormRequest
@@ -13,7 +14,7 @@ class StoreClassRoomRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return auth()->user()->role === User::SUPER_ADMIN || auth()->user()->role === User::ADMIN ? true : false;
     }
 
     /**
@@ -24,7 +25,7 @@ class StoreClassRoomRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|unique:class_rooms|max:255'
         ];
     }
 }

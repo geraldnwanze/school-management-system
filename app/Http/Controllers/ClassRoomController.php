@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreClassRoomRequest;
 use App\Http\Requests\UpdateClassRoomRequest;
 use App\Models\ClassRoom;
+use Illuminate\Support\Facades\Log;
 
 class ClassRoomController extends Controller
 {
@@ -15,7 +16,8 @@ class ClassRoomController extends Controller
      */
     public function index()
     {
-        //
+        $classes = ClassRoom::paginate(10);
+        return view('dashboard.class.index', compact('classes'));
     }
 
     /**
@@ -25,7 +27,7 @@ class ClassRoomController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.class.create');
     }
 
     /**
@@ -36,7 +38,15 @@ class ClassRoomController extends Controller
      */
     public function store(StoreClassRoomRequest $request)
     {
-        //
+        try {
+            if (!ClassRoom::create($request->validated())) {
+                return back()->with('error', 'something went wrong');
+            }
+            return redirect()->route('dashboard.classes.index')->with('success', 'new class created');
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+            dd($th->getMessage());
+        }
     }
 
     /**
@@ -45,7 +55,7 @@ class ClassRoomController extends Controller
      * @param  \App\Models\ClassRoom  $classRoom
      * @return \Illuminate\Http\Response
      */
-    public function show(ClassRoom $classRoom)
+    public function show(ClassRoom $class)
     {
         //
     }
@@ -56,9 +66,9 @@ class ClassRoomController extends Controller
      * @param  \App\Models\ClassRoom  $classRoom
      * @return \Illuminate\Http\Response
      */
-    public function edit(ClassRoom $classRoom)
+    public function edit(ClassRoom $class)
     {
-        //
+        return view('dashboard.class.edit', compact('class'));
     }
 
     /**
@@ -68,9 +78,17 @@ class ClassRoomController extends Controller
      * @param  \App\Models\ClassRoom  $classRoom
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateClassRoomRequest $request, ClassRoom $classRoom)
+    public function update(UpdateClassRoomRequest $request, ClassRoom $class)
     {
-        //
+        try {
+            if (!$class->update($request->validated())) {
+                return back()->with('error', 'something went wrong');
+            }
+            return redirect()->route('dashboard.classes.index')->with('success', 'class updated');
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+            dd($th->getMessage());
+        }
     }
 
     /**
@@ -79,8 +97,29 @@ class ClassRoomController extends Controller
      * @param  \App\Models\ClassRoom  $classRoom
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ClassRoom $classRoom)
+    public function destroy(ClassRoom $class)
     {
-        //
+        try {
+            if (!$class->delete()) {
+                return back()->with('error', 'something went wrong');
+            }
+            return back()->with('success', 'class deleted');
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+            dd($th->getMessage());
+        }
+    }
+
+    public function toggleStatus(ClassRoom $class)
+    {
+        try {
+            if (!$class->update(['active' => !$class->active])) {
+                return back()->with('error', 'something went wrong');
+            }
+            return back()->with('success', 'class status updated');
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+            dd($th->getMessage());
+        }
     }
 }

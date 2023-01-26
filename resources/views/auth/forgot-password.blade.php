@@ -11,7 +11,7 @@
                             <div class="auth-form">
                                 @include('includes.dashboard-return-msg')
                                 <h2 class="text-center mb-3"> <span class="fa fa-home" style="font-size:60px;"></span> Property Manager</h2>
-                                <x-errors />
+                                
                                 <h4 class="text-center mb-4">Forgot Password</h4>
                                 <form action="{{route('forgotPwd')}}" method="POST">
                                     @csrf
