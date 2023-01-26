@@ -12,7 +12,7 @@
                                 <h2 class="text-center mb-3"> <span class="fa fa-graduation-cap" style="font-size:60px;"></span> School Manager</h2>
                                 <h4 class="text-center mb-4"> <span class="fa fa-key"></span> Sign in</h4>
                                 @include('includes.dashboard-return-msg')
-                                <x-errors/>
+                                
                                 <form action="{{route('auth.login')}}" method="POST">
                                     @csrf
                                     <div class="form-group">

@@ -1,7 +1,6 @@
 @extends('layouts.dashboard')
 @section('content')
 
-<x-errors />
 
 <div class="col-lg-8 offset-2">
     {{-- From here users that are not admin can create user --}}

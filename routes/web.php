@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\ClassRoomController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SuperAdminController;
@@ -93,5 +94,15 @@ Route::group(['as' => 'dashboard.', 'middleware' => 'auth'], function () {
     });
     Route::group(['prefix' => 'student', 'as' => 'student.', 'middleware' => ['student']], function () {
         Route::get('/', [StudentController::class, 'index'])->name('index');
+    });
+
+    Route::group(['prefix' => 'classes', 'as' => 'classes.'], function () {
+        Route::get('/', [ClassRoomController::class, 'index'])->name('index');
+        Route::get('create', [ClassRoomController::class, 'create'])->name('create');
+        Route::post('store', [ClassRoomController::class, 'store'])->name('store');
+        Route::get('{class}/edit', [ClassRoomController::class, 'edit'])->name('edit');
+        Route::patch('{class}/update', [ClassRoomController::class, 'update'])->name('update');
+        Route::patch('{class}/toggle-status', [ClassRoomController::class, 'toggleStatus'])->name('toggle-status');
+        Route::delete('{class}/delete', [ClassRoomController::class, 'destroy'])->name('delete');
     });
 });
