@@ -5,8 +5,8 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Classes</h4>
-                    <a href="{{ route('dashboard.classes.create') }}" class="btn btn-sm btn-primary">create class</a>
+                    <h4 class="card-title">Subjects</h4>
+                    <a href="{{ route('dashboard.subjects.create') }}" class="btn btn-sm btn-primary">create subject</a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -20,21 +20,21 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($classes as $class)
+                                @forelse ($subjects as $subject)
                                     <tr>
-                                        <td>{{ $classes->firstItem() + $loop->index }}</td>
-                                        <td>{{ $class->name }}</td>
-                                        <td><span class="badge badge-{{ $class->active ? 'success' : 'danger' }}">{{ $class->active ? 'active' : 'disabled' }}</span></td>
+                                        <td>{{ $subjects->firstItem() + $loop->index }}</td>
+                                        <td>{{ $subject->name }}</td>
+                                        <td><span class="badge badge-{{ $subject->active ? 'success' : 'danger' }}">{{ $subject->active ? 'active' : 'disabled' }}</span></td>
                                         <td>
-                                            <button form="toggle-status-{{ $class->id }}" class="btn btn-sm btn-{{ $class->active ? 'danger' : 'primary' }}"><i class="fa fa-arrow-{{ $class->active ? 'down' : 'up' }}"></i></button>
-                                            <a href="{{ route('dashboard.classes.edit', $class->id) }}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
-                                            <button form="delete-class-{{ $class->id }}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+                                            <button form="toggle-status-{{ $subject->id }}" class="btn btn-sm btn-{{ $subject->active ? 'danger' : 'primary' }}"><i class="fa fa-arrow-{{ $subject->active ? 'down' : 'up' }}"></i></button>
+                                            <a href="{{ route('dashboard.subjects.edit', $subject->id) }}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
+                                            <button form="delete-class-{{ $subject->id }}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
                                         </td>
-                                        <form action="{{ route('dashboard.classes.toggle-status', $class->id) }}" method="post" id="toggle-status-{{ $class->id }}">
+                                        <form action="{{ route('dashboard.subjects.toggle-status', $subject->id) }}" method="post" id="toggle-status-{{ $subject->id }}">
                                             @csrf
                                             @method('PATCH')
                                         </form>
-                                        <form action="{{ route('dashboard.classes.delete', $class->id) }}" method="post" id="delete-class-{{ $class->id }}">
+                                        <form action="{{ route('dashboard.subjects.delete', $subject->id) }}" method="post" id="delete-class-{{ $subject->id }}">
                                         @csrf
                                         @method('DELETE')
                                         </form>
@@ -49,7 +49,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    {{ $classes->links() }}
+                    {{ $subjects->links() }}
                 </div>
             </div>
             <!-- /# card -->
