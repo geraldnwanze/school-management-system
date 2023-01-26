@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreSubjectRequest extends FormRequest
@@ -13,7 +14,7 @@ class StoreSubjectRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return authorized();
     }
 
     /**
@@ -24,7 +25,7 @@ class StoreSubjectRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|unique:subjects|max:255'
         ];
     }
 }

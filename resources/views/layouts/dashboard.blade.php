@@ -136,7 +136,7 @@
                     </li>
 
                     <li>
-                        <a href="#">
+                        <a href="{{ route('dashboard.subjects.index') }}">
                             <i class="fa fa-book"></i>
                             <span class="nav-text">Subjects</span>
                         </a>

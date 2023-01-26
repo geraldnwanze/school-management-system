@@ -14,7 +14,7 @@ class UpdateClassRoomRequest extends FormRequest
      */
     public function authorize()
     {
-        return auth()->user()->role === User::SUPER_ADMIN || auth()->user()->role === User::ADMIN ? true : false;
+        return authorized();
     }
 
     /**

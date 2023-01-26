@@ -33,5 +33,9 @@ class AppServiceProvider extends ServiceProvider
         if (file_exists(app_path().'/Helpers/Role.php')) {
             require_once(app_path().'/Helpers/Role.php');
         }
+        if (file_exists(app_path().'/Helpers/Authorize.php')) {
+            require_once(app_path().'/Helpers/Authorize.php');
+        }
     }
+
 }

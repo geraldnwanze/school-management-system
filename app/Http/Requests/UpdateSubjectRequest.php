@@ -13,7 +13,7 @@ class UpdateSubjectRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return authorized();
     }
 
     /**
@@ -24,7 +24,7 @@ class UpdateSubjectRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|max:255'
         ];
     }
 }

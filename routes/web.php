@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ClassRoomController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\SuperAdminController;
 use Illuminate\Support\Facades\Route;
 
@@ -104,5 +105,15 @@ Route::group(['as' => 'dashboard.', 'middleware' => 'auth'], function () {
         Route::patch('{class}/update', [ClassRoomController::class, 'update'])->name('update');
         Route::patch('{class}/toggle-status', [ClassRoomController::class, 'toggleStatus'])->name('toggle-status');
         Route::delete('{class}/delete', [ClassRoomController::class, 'destroy'])->name('delete');
+    });
+
+    Route::group(['prefix' => 'subjects', 'as' => 'subjects.'], function () {
+        Route::get('/', [SubjectController::class, 'index'])->name('index');
+        Route::get('create', [SubjectController::class, 'create'])->name('create');
+        Route::post('store', [SubjectController::class, 'store'])->name('store');
+        Route::get('{subject}/edit', [SubjectController::class, 'edit'])->name('edit');
+        Route::patch('{subject}/update', [SubjectController::class, 'update'])->name('update');
+        Route::patch('{subject}/toggle-status', [SubjectController::class, 'toggleStatus'])->name('toggle-status');
+        Route::delete('{subject}/delete', [SubjectController::class, 'destroy'])->name('delete');
     });
 });
