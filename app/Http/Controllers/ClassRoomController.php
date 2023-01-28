@@ -101,9 +101,9 @@ class ClassRoomController extends Controller
     {
         try {
             if (!$class->delete()) {
-                return back()->with('error', 'something went wrong');
+                return redirect()->route('dashboard.classes.index')->with('error', 'something went wrong');
             }
-            return back()->with('success', 'class deleted');
+            return redirect()->route('dashboard.classes.index')->with('success', 'class deleted');
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
             dd($th->getMessage());
@@ -114,9 +114,9 @@ class ClassRoomController extends Controller
     {
         try {
             if (!$class->update(['active' => !$class->active])) {
-                return back()->with('error', 'something went wrong');
+                return redirect()->route('dashboard.classes.index')->with('error', 'something went wrong');
             }
-            return back()->with('success', 'class status updated');
+            return redirect()->route('dashboard.classes.index')->with('success', 'class status updated');
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
             dd($th->getMessage());

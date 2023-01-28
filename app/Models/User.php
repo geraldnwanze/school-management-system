@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\DefaultValueForCreatedByAndUpdatedBy;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -19,6 +20,8 @@ class User extends Authenticatable
     public const ADMIN = 'admin';
     public const STAFF = 'staff';
     public const STUDENT = 'student';
+
+    protected $fillable = ['role','username','email','password','active'];
 
     public function setPasswordAttribute($password)
     {

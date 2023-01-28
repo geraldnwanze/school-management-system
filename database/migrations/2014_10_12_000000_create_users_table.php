@@ -20,13 +20,8 @@ class CreateUsersTable extends Migration
             $table->string('email')->nullable()->index();
             $table->string('password');
             $table->boolean('active')->default(true);
-            $table->unsignedBigInteger('created_by');
-            $table->unsignedBigInteger('updated_by');
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreign('created_by')->references('id')->on('users')->cascadeOnDelete();
-            $table->foreign('updated_by')->references('id')->on('users')->cascadeOnDelete();
         });
     }
 
