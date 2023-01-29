@@ -141,6 +141,13 @@
                             <span class="nav-text">Subjects</span>
                         </a>
                     </li>
+
+                    <li>
+                        <a href="{{ route('dashboard.terms.index') }}">
+                            <i class="fa fa-book"></i>
+                            <span class="nav-text">Terms</span>
+                        </a>
+                    </li>
                     @endif
 
                     @if(admin())
