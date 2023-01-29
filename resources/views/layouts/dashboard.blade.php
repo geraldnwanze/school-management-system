@@ -136,6 +136,13 @@
                     </li>
 
                     <li>
+                        <a href="{{ route('dashboard.grades.index') }}">
+                            <i class="fa fa-list"></i>
+                            <span class="nav-text">Grades</span>
+                        </a>
+                    </li>
+
+                    <li>
                         <a href="{{ route('dashboard.subjects.index') }}">
                             <i class="fa fa-book"></i>
                             <span class="nav-text">Subjects</span>
@@ -164,6 +171,13 @@
                             </ul>
                         </li>
 
+                        <li>
+                            <a href="{{ route('dashboard.grades.index') }}">
+                                <i class="fa fa-list"></i>
+                                <span class="nav-text">Grades</span>
+                            </a>
+                        </li>
+                        
                         <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                             class="fa fa-gears"></i><span class="nav-text">Subject</span></a>
                             <ul aria-expanded="false">

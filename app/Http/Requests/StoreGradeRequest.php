@@ -13,7 +13,7 @@ class StoreGradeRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return authorized();
     }
 
     /**
@@ -24,7 +24,25 @@ class StoreGradeRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'grade' => 'required',
+            'min' => 'required|numeric',
+            'max' => 'required|numeric'
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'min' => 'minimum score',
+            'max' => 'maximum score'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'min.required' => 'minimum score for grade is required',
+            'max.required' => 'maximum score for grade is required'
         ];
     }
 }
