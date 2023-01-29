@@ -25,8 +25,8 @@ class StoreGradeRequest extends FormRequest
     {
         return [
             'grade' => 'required',
-            'min' => 'required|integer',
-            'max' => 'required|integer'
+            'min' => 'required|numeric',
+            'max' => 'required|numeric'
         ];
     }
 

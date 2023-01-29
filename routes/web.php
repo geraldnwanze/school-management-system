@@ -69,6 +69,7 @@ Route::group(['as' => 'dashboard.', 'middleware' => 'auth'], function () {
         Route::get('create', [GradeController::class, 'create'])->name('create');
         Route::post('create', [GradeController::class, 'store']);
         Route::get('{grade}/edit', [GradeController::class, 'edit'])->name('edit');
-        Route::patch('{grade}/edit', [GradeController::class, 'updated']);
+        Route::patch('{grade}/edit', [GradeController::class, 'update']);
+        Route::delete('{grade}/delete', [GradeController::class, 'destroy'])->name('delete');
     });
 });
