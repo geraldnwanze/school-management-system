@@ -116,7 +116,7 @@
                     </li>
 
                     <li>
-                        <a class="" href="#" aria-expanded="false"><i
+                        <a class="" href="{{ route('dashboard.'.auth()->user()->role.'.index') }}" aria-expanded="false"><i
                                 class="fa fa-dashboard"></i><span class="nav-text">Dashboard</span></a>
                     </li>
                     
