@@ -8,6 +8,7 @@ use App\Http\Controllers\StaffController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\SuperAdminController;
+use App\Http\Controllers\TermController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -72,4 +73,15 @@ Route::group(['as' => 'dashboard.', 'middleware' => 'auth'], function () {
         Route::patch('{grade}/edit', [GradeController::class, 'update']);
         Route::delete('{grade}/delete', [GradeController::class, 'destroy'])->name('delete');
     });
+
+    Route::group(['prefix' => 'terms', 'as' => 'terms.'], function () {
+        Route::get('/', [TermController::class, 'index'])->name('index');
+        Route::get('create', [TermController::class, 'create'])->name('create');
+        Route::post('store', [TermController::class, 'store'])->name('store');
+        Route::get('{term}/edit', [TermController::class, 'edit'])->name('edit');
+        Route::patch('{term}/update', [TermController::class, 'update'])->name('update');
+        Route::patch('{term}/toggle-status', [TermController::class, 'toggleStatus'])->name('toggle-status');
+        Route::delete('{term}/delete', [TermController::class, 'destroy'])->name('delete');
+    });
+
 });
