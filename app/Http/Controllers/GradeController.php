@@ -15,7 +15,8 @@ class GradeController extends Controller
      */
     public function index()
     {
-        //
+        $data['grades'] = Grade::all();
+        return view('dashboard.grade.index', $data);
     }
 
     /**
@@ -25,7 +26,7 @@ class GradeController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.grade.create');
     }
 
     /**
@@ -36,7 +37,20 @@ class GradeController extends Controller
      */
     public function store(StoreGradeRequest $request)
     {
-        //
+        $request->validated();
+        try {
+            $storeGrade = Grade::create([
+                'grade' => $request->grade,
+                'min' => $request->min,
+                'max' => $request->max
+            ]);
+            if($storeGrade){
+                return back()->with('success', 'Grade was created successfully!');
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+            dd($th->getMessage());
+        }
     }
 
     /**
@@ -58,7 +72,7 @@ class GradeController extends Controller
      */
     public function edit(Grade $grade)
     {
-        //
+        return view('dashboard.grade.edit', compact('grade'));
     }
 
     /**

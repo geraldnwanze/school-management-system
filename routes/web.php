@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ClassRoomController;
+use App\Http\Controllers\GradeController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
@@ -21,60 +22,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::view('/', 'welcome');
-
-
-//authentication routes
-Route::get('/login', 'Auth\AuthController@login')->name('login');
-Route::post('/login', 'Auth\AuthController@userLogin');
-Route::post('/logout', 'Auth\AuthController@logout')->name('logout');
-
-//authenticated users
-// Route::group([
-    // 'middleware' => 'auth', 
-    // 'as' => 'dashboard.'], function () {
-    // Route::group(['prefix' => 'superadmin', 'as' => 'superadmin.'], function () {
-    //     Route::get('/dashboard', 'Admin\DashboardController@superadmin')->name('dashboard');
-
-        //students
-        // Route::get('/create-student', 'Student\RegistrationController@index')->name('createStudent');
-        // Route::post('/create-student', 'Student\RegistrationController@saveStudent');
-
-        //staffs
-    //     Route::get('/create-staff', 'Staff\RegistrationController@index')->name('createStaff');
-    //     Route::post('/create-staff', 'Staff\RegistrationController@saveStaff');
-    // });
-
-    // Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
-    //     Route::get('/dashboard', 'Admin\DashboardController@admin')->name('dashboard');
-        
-        //students
-        // Route::get('/create-student', 'Student\RegistrationController@index')->name('createStudent');
-        // Route::post('/create-student', 'Student\RegistrationController@saveStudent');
-
-        //staffs
-        // Route::get('/create-staff', 'Staff\RegistrationController@index')->name('createStaff');
-        // Route::post('/create-staff', 'Staff\RegistrationController@saveStaff');
-        // Route::get('/assign-staff-to-class', 'Staff\AssignStaffController@index')->name('assignStaff');
-        // Route::post('/assign-staff-to-class', 'Staff\AssignStaffController@saveStaffAssignment');
-        // Route::get('/assign-subject-to-staff', 'Staff\AssignStaffController@assignSubject')->name('assignSubject');
-        // Route::post('/assign-subject-to-staff', 'Staff\AssignStaffController@saveAssignSubject');
-        // Route::get('/create-classes', 'Student\ClassesController@createClass')->name('createClass');
-        // Route::get('/create-subjects', 'Student\SubjectsController@createSubject')->name('createSubject');
-        
-    // });
-
-    // Route::group(['prefix' => 'student', 'as' => 'students.'], function () {
-    //     Route::get('/dashboard', 'Student\DashboardController@index');
-    //     Route::get('/check-result', 'Student\ResultController@checkResult');
-    // });
-
-    // Route::group(['prefix' => 'staff', 'as' => 'staffs.'], function () {
-    //     Route::get('/dashboard', 'Staff\DashboardController@index');
-    // });
-
-// });
-
-/**************************************************************** */
 
 Route::group(['as' => 'auth.'], function () {
     Route::view('login', 'auth.login')->name('login-page');
@@ -115,5 +62,13 @@ Route::group(['as' => 'dashboard.', 'middleware' => 'auth'], function () {
         Route::patch('{subject}/update', [SubjectController::class, 'update'])->name('update');
         Route::patch('{subject}/toggle-status', [SubjectController::class, 'toggleStatus'])->name('toggle-status');
         Route::delete('{subject}/delete', [SubjectController::class, 'destroy'])->name('delete');
+    });
+
+    Route::group(['prefix' => 'grades', 'as' => 'grades.'], function () {
+        Route::get('/', [GradeController::class, 'index'])->name('index');
+        Route::get('create', [GradeController::class, 'create'])->name('create');
+        Route::post('create', [GradeController::class, 'store']);
+        Route::get('{grade}/edit', [GradeController::class, 'edit'])->name('edit');
+        Route::patch('{grade}/edit', [GradeController::class, 'updated']);
     });
 });
