@@ -14,7 +14,7 @@ class TermFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => 'first'
         ];
     }
 }
