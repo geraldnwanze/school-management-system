@@ -13,7 +13,7 @@ class UpdateSessionRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return authorized();
     }
 
     /**
@@ -24,7 +24,8 @@ class UpdateSessionRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'from' => 'required|unique:sessions|digits:4|integer',
+            'to' => 'required|unique:sessions|digits:4|integer',
         ];
     }
 }

@@ -13,7 +13,6 @@ class TermTest extends TestCase
 
     public function test_index()
     {
-        $terms = Term::factory()->create();
         $response = $this->get(route('dashboard.terms.index'));
         $response->assertStatus(200);
         $response->assertViewIs('dashboard.terms.index');

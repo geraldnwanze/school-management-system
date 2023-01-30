@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ClassRoomController;
+use App\Http\Controllers\SessionController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
@@ -126,6 +127,16 @@ Route::group(['as' => 'dashboard.', 'middleware' => 'auth'], function () {
         Route::patch('{term}/update', [TermController::class, 'update'])->name('update');
         Route::patch('{term}/toggle-status', [TermController::class, 'toggleStatus'])->name('toggle-status');
         Route::delete('{term}/delete', [TermController::class, 'destroy'])->name('delete');
+    });
+
+    Route::group(['prefix' => 'sessions', 'as' => 'sessions.'], function () {
+        Route::get('/', [SessionController::class, 'index'])->name('index');
+        Route::get('create', [SessionController::class, 'create'])->name('create');
+        Route::post('store', [SessionController::class, 'store'])->name('store');
+        Route::get('{session}/edit', [SessionController::class, 'edit'])->name('edit');
+        Route::patch('{session}/update', [SessionController::class, 'update'])->name('update');
+        Route::patch('{session}/toggle-status', [SessionController::class, 'toggleStatus'])->name('toggle-status');
+        Route::delete('{session}/delete', [SessionController::class, 'destroy'])->name('delete');
     });
 
 });

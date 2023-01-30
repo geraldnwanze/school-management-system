@@ -13,7 +13,6 @@ class SubjectTest extends TestCase
 
     public function test_index()
     {
-        Subject::factory()->create();
         $response = $this->get(route('dashboard.subjects.index'));
         $response->assertStatus(200);
         $response->assertViewIs('dashboard.subjects.index');
