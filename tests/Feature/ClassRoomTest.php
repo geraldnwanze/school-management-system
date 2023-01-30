@@ -11,7 +11,6 @@ class ClassRoomTest extends TestCase
 
     public function test_index()
     {
-        ClassRoom::factory()->create();
         $response = $this->get(route('dashboard.classes.index'));
         $response->assertStatus(200);
         $response->assertViewIs('dashboard.class.index');

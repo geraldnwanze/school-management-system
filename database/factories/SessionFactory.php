@@ -14,7 +14,8 @@ class SessionFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'from' => '2022',
+            'to' => '2023'
         ];
     }
 }

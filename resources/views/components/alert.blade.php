@@ -24,5 +24,5 @@
 <script>
     setTimeout(() => {
         $('.alert').css('display', 'none');
-    }, 3000);
+    }, 5000);
 </script>
