@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
             ClassRoomSeeder::class,
             SubjectSeeder::class,
             SessionSeeder::class,
-            TermSeeder::class
+            TermSeeder::class,
+            GradeSeeder::class
         ]);
     }
 }

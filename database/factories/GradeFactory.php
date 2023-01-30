@@ -14,7 +14,9 @@ class GradeFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'grade' => $this->faker->randomElement(array('A', 'B', 'C', 'D', 'F')),
+            'min' => $this->faker->numberBetween('40', '69'),
+            'max' => $this->faker->numberBetween('70', '100') 
         ];
     }
 }
