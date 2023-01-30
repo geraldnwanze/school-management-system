@@ -47,7 +47,7 @@ class GradeController extends Controller
             
             $storeGrade = Grade::create($request->validated());
             if($storeGrade){
-                return back()->with('success', 'Grade was created successfully!');
+                return redirect()->route('dashboard.grades.index')->with('success', 'Grade was created successfully!');
             }
         } catch (\Throwable $th) {
             //throw $th;
