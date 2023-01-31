@@ -85,4 +85,36 @@ class SessionController extends Controller
             return back()->with('error', 'something went wrong');
         }
     }
+
+    public function deleted()
+    {
+        $sessions = Session::onlyTrashed()->paginate(10);
+        return view('dashboard.sessions.deleted', compact('sessions'));
+    }
+
+    public function restore($session)
+    {
+        try {
+            if (!Session::onlyTrashed()->find($session)->update(['deleted_at' => null])) {
+                return redirect()->route('dashboard.sessions.index')->with('error', 'something went wrong');
+            }
+            return redirect()->route('dashboard.sessions.index')->with('success', 'session restored');
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+            dd($th->getMessage());
+        }
+    }
+
+    public function forceDelete($session)
+    {
+        try {
+            if (!Session::onlyTrashed()->find($session)->forceDelete()) {
+                return redirect()->route('dashboard.sessions.deleted')->with('error', 'something went wrong');
+            }
+            return redirect()->route('dashboard.sessions.deleted')->with('success', 'session permanently deleted');
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+            dd($th->getMessage());
+        }
+    }
 }

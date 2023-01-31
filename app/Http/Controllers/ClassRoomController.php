@@ -9,33 +9,17 @@ use Illuminate\Support\Facades\Log;
 
 class ClassRoomController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $classes = ClassRoom::paginate(10);
         return view('dashboard.class.index', compact('classes'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('dashboard.class.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreClassRoomRequest  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreClassRoomRequest $request)
     {
         try {
@@ -49,35 +33,16 @@ class ClassRoomController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\ClassRoom  $classRoom
-     * @return \Illuminate\Http\Response
-     */
     public function show(ClassRoom $class)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\ClassRoom  $classRoom
-     * @return \Illuminate\Http\Response
-     */
     public function edit(ClassRoom $class)
     {
         return view('dashboard.class.edit', compact('class'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateClassRoomRequest  $request
-     * @param  \App\Models\ClassRoom  $classRoom
-     * @return \Illuminate\Http\Response
-     */
     public function update(UpdateClassRoomRequest $request, ClassRoom $class)
     {
         try {
@@ -91,12 +56,19 @@ class ClassRoomController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\ClassRoom  $classRoom
-     * @return \Illuminate\Http\Response
-     */
+    public function toggleStatus(ClassRoom $class)
+    {
+        try {
+            if (!$class->update(['active' => !$class->active])) {
+                return redirect()->route('dashboard.classes.index')->with('error', 'something went wrong');
+            }
+            return redirect()->route('dashboard.classes.index')->with('success', 'class status updated');
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+            dd($th->getMessage());
+        }
+    }
+
     public function destroy(ClassRoom $class)
     {
         try {
@@ -110,13 +82,32 @@ class ClassRoomController extends Controller
         }
     }
 
-    public function toggleStatus(ClassRoom $class)
+    public function deleted()
+    {
+        $classes = ClassRoom::onlyTrashed()->paginate(10);
+        return view('dashboard.class.deleted', compact('classes'));
+    }
+
+    public function restore($class)
     {
         try {
-            if (!$class->update(['active' => !$class->active])) {
+            if (!ClassRoom::onlyTrashed()->find($class)->update(['deleted_at' => null])) {
                 return redirect()->route('dashboard.classes.index')->with('error', 'something went wrong');
             }
-            return redirect()->route('dashboard.classes.index')->with('success', 'class status updated');
+            return redirect()->route('dashboard.classes.index')->with('success', 'class restored');
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+            dd($th->getMessage());
+        }
+    }
+ 
+    public function forceDelete($class)
+    {
+        try {
+            if (!ClassRoom::onlyTrashed()->find($class)->forceDelete()) {
+                return redirect()->route('dashboard.classes.deleted')->with('error', 'something went wrong');
+            }
+            return redirect()->route('dashboard.classes.deleted')->with('success', 'class permanently deleted');
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
             dd($th->getMessage());
