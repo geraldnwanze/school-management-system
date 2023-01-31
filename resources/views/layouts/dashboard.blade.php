@@ -122,23 +122,23 @@
                     
                     @if(superadmin())
                     <li>
-                        <a class="" href="{{ route('dashboard.classes.index') }}" >
-                            <i class="fa fa-home"></i>
-                            <span class="nav-text">Classes</span>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="#" >
-                            <i class="fa fa-users"></i>
-                            <span class="nav-text">Users</span>
+                        <a href="{{ route('dashboard.sessions.index') }}">
+                            <i class="fa fa-calendar"></i>
+                            <span class="nav-text">Sessions</span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="{{ route('dashboard.grades.index') }}">
-                            <i class="fa fa-list"></i>
-                            <span class="nav-text">Grades</span>
+                        <a href="{{ route('dashboard.terms.index') }}">
+                            <i class="fa fa-calendar"></i>
+                            <span class="nav-text">Terms</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="" href="{{ route('dashboard.classes.index') }}" >
+                            <i class="fa fa-home"></i>
+                            <span class="nav-text">Classes</span>
                         </a>
                     </li>
 
@@ -150,17 +150,41 @@
                     </li>
 
                     <li>
-                        <a href="{{ route('dashboard.terms.index') }}">
-                            <i class="fa fa-book"></i>
-                            <span class="nav-text">Terms</span>
+                        <a href="{{ route('dashboard.grades.index') }}">
+                            <i class="fa fa-list"></i>
+                            <span class="nav-text">Grades</span>
                         </a>
                     </li>
                     
                     <li>
-                        <a href="{{ route('dashboard.sessions.index') }}">
-                            <i class="fa fa-book"></i>
-                            <span class="nav-text">Sessions</span>
+                        <a href="#" >
+                            <i class="fa fa-users"></i>
+                            <span class="nav-text">Users</span>
                         </a>
+                    </li>
+
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="fa fa-trash"></i>
+                            <span class="nav-text">Deleted Data</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li>
+                                <a href="{{ route('dashboard.sessions.deleted') }}">Sessions</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('dashboard.terms.deleted') }}">Terms</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('dashboard.classes.deleted') }}">Classes</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('dashboard.subjects.deleted') }}">Subjects</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('dashboard.grades.deleted') }}">Grades</a>
+                            </li>
+                        </ul>
                     </li>
                     @endif
 
@@ -220,7 +244,8 @@
                         </li>
                     @endif
 
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                         class="fa fa-wrench"></i><span class="nav-text">Settings</span></a>
                         <ul aria-expanded="false">
                             <li><a href="#">Password</a></li>

@@ -54,6 +54,10 @@ Route::group(['as' => 'dashboard.', 'middleware' => 'auth'], function () {
         Route::patch('{class}/update', [ClassRoomController::class, 'update'])->name('update');
         Route::patch('{class}/toggle-status', [ClassRoomController::class, 'toggleStatus'])->name('toggle-status');
         Route::delete('{class}/delete', [ClassRoomController::class, 'destroy'])->name('delete');
+        
+        Route::get('deleted', [ClassRoomController::class, 'deleted'])->name('deleted');
+        Route::patch('{class}/restore', [ClassRoomController::class, 'restore'])->name('restore');
+        Route::delete('{class}/force-delete', [ClassRoomController::class, 'forceDelete'])->name('force-delete');
     });
 
     Route::group(['prefix' => 'subjects', 'as' => 'subjects.'], function () {
@@ -64,6 +68,10 @@ Route::group(['as' => 'dashboard.', 'middleware' => 'auth'], function () {
         Route::patch('{subject}/update', [SubjectController::class, 'update'])->name('update');
         Route::patch('{subject}/toggle-status', [SubjectController::class, 'toggleStatus'])->name('toggle-status');
         Route::delete('{subject}/delete', [SubjectController::class, 'destroy'])->name('delete');
+
+        Route::get('deleted', [SubjectController::class, 'deleted'])->name('deleted');
+        Route::patch('{subject}/restore', [SubjectController::class, 'restore'])->name('restore');
+        Route::delete('{subject}/force-delete', [SubjectController::class, 'forceDelete'])->name('force-delete');
     });
 
     Route::group(['prefix' => 'grades', 'as' => 'grades.'], function () {
@@ -71,8 +79,12 @@ Route::group(['as' => 'dashboard.', 'middleware' => 'auth'], function () {
         Route::get('create', [GradeController::class, 'create'])->name('create');
         Route::post('create', [GradeController::class, 'store']);
         Route::get('{grade}/edit', [GradeController::class, 'edit'])->name('edit');
-        Route::patch('{grade}/edit', [GradeController::class, 'update']);
+        Route::patch('{grade}/edit', [GradeController::class, 'update'])->name('update');
         Route::delete('{grade}/delete', [GradeController::class, 'destroy'])->name('delete');
+
+        Route::get('deleted', [GradeController::class, 'deleted'])->name('deleted');
+        Route::patch('{grade}/restore', [GradeController::class, 'restore'])->name('restore');
+        Route::delete('{grade}/force-delete', [GradeController::class, 'forceDelete'])->name('force-delete');
     });
 
     Route::group(['prefix' => 'terms', 'as' => 'terms.'], function () {
@@ -83,6 +95,10 @@ Route::group(['as' => 'dashboard.', 'middleware' => 'auth'], function () {
         Route::patch('{term}/update', [TermController::class, 'update'])->name('update');
         Route::patch('{term}/toggle-status', [TermController::class, 'toggleStatus'])->name('toggle-status');
         Route::delete('{term}/delete', [TermController::class, 'destroy'])->name('delete');
+
+        Route::get('deleted', [TermController::class, 'deleted'])->name('deleted');
+        Route::patch('{term}/restore', [TermController::class, 'restore'])->name('restore');
+        Route::delete('{term}/force-delete', [TermController::class, 'forceDelete'])->name('force-delete');
     });
 
     Route::group(['prefix' => 'sessions', 'as' => 'sessions.'], function () {
@@ -93,6 +109,10 @@ Route::group(['as' => 'dashboard.', 'middleware' => 'auth'], function () {
         Route::patch('{session}/update', [SessionController::class, 'update'])->name('update');
         Route::patch('{session}/toggle-status', [SessionController::class, 'toggleStatus'])->name('toggle-status');
         Route::delete('{session}/delete', [SessionController::class, 'destroy'])->name('delete');
+
+        Route::get('deleted', [SessionController::class, 'deleted'])->name('deleted');
+        Route::patch('{session}/restore', [SessionController::class, 'restore'])->name('restore');
+        Route::delete('{session}/force-delete', [SessionController::class, 'forceDelete'])->name('force-delete');
     });
 
 });

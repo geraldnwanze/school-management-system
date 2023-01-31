@@ -5,36 +5,21 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreGradeRequest;
 use App\Http\Requests\UpdateGradeRequest;
 use App\Models\Grade;
+use Illuminate\Support\Facades\Log;
 
 class GradeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $data['grades'] = Grade::orderBy('grade', 'ASC')->get();
         return view('dashboard.grade.index', $data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('dashboard.grade.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreGradeRequest  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreGradeRequest $request)
     {
         try {
@@ -55,35 +40,16 @@ class GradeController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Grade  $grade
-     * @return \Illuminate\Http\Response
-     */
     public function show(Grade $grade)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Grade  $grade
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Grade $grade)
     {
         return view('dashboard.grade.edit', compact('grade'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateGradeRequest  $request
-     * @param  \App\Models\Grade  $grade
-     * @return \Illuminate\Http\Response
-     */
     public function update(UpdateGradeRequest $request, Grade $grade)
     {
         try {
@@ -104,21 +70,47 @@ class GradeController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Grade  $grade
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Grade $grade)
     {
         try {
             if(!$grade->delete()){
-                return back()->with('error', 'Grade could not be deeted');
+                return back()->with('error', 'Grade could not be deleted');
             }
-            return back()->with('success', 'Grade removed successfully');
+            return redirect()->route('dashboard.grades.index')->with('success', 'Grade removed successfully');
         } catch (\Throwable $th) {
             throw $th;
+        }
+    }
+
+    public function deleted()
+    {
+        $grades = Grade::onlyTrashed()->paginate(10);
+        return view('dashboard.grade.deleted', compact('grades'));
+    }
+
+    public function restore($grade)
+    {
+        try {
+            if (!Grade::onlyTrashed()->find($grade)->update(['deleted_at' => null])) {
+                return redirect()->route('dashboard.grades.index')->with('error', 'something went wrong');
+            }
+            return redirect()->route('dashboard.grades.index')->with('success', 'grade restored');
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+            dd($th->getMessage());
+        }
+    }
+
+    public function forceDelete($grade)
+    {
+        try {
+            if (!Grade::onlyTrashed()->find($grade)->forceDelete()) {
+                return redirect()->route('dashboard.grades.deleted')->with('error', 'something went wrong');
+            }
+            return redirect()->route('dashboard.grades.deleted')->with('success', 'grade permanently deleted');
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+            dd($th->getMessage());
         }
     }
 }

@@ -12,6 +12,6 @@ class Grade extends Model
     use HasFactory, SoftDeletes, DefaultValueForCreatedByAndUpdatedBy;
 
     protected $fillable = [
-        'grade', 'min', 'max'
+        'grade', 'min', 'max', 'deleted_at'
     ];
 }

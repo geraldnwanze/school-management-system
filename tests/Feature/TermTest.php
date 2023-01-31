@@ -68,4 +68,33 @@ class TermTest extends TestCase
         $response->assertRedirect(route('dashboard.terms.index'));
         $this->assertSoftDeleted('terms', ['id' => $term->id]);
     }
+
+    public function test_deleted()
+    {
+        $response = $this->get(route('dashboard.terms.deleted'));
+        $response->assertStatus(200);
+        $response->assertViewIs('dashboard.terms.deleted');
+        $response->assertViewHas('terms');
+    }
+
+    public function test_restore()
+    {
+        $term = Term::factory()->create();
+        $term->delete();
+        $response = $this->patch(route('dashboard.terms.restore', $term->id));
+        $response->assertStatus(302);
+        $response->assertRedirect(route('dashboard.terms.index'));
+        $this->assertDatabaseHas('terms', ['deleted_at' => null]);
+        $this->assertNotSoftDeleted('terms', ['id' => $term->id]);
+    }
+
+    public function test_force_delete()
+    {
+        $term = Term::factory()->create();
+        $term->delete();
+        $response = $this->delete(route('dashboard.terms.force-delete', $term->id));
+        $response->assertStatus(302);
+        $response->assertRedirect(route('dashboard.terms.deleted'));
+        $this->assertDatabaseMissing('terms', ['id' => $term->id]);
+    }
 }

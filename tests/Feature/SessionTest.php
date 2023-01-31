@@ -67,4 +67,33 @@ class SessionTest extends TestCase
         $response->assertRedirect(route('dashboard.sessions.index'));
         $this->assertSoftDeleted('sessions', ['id' => $session->id]);
     }
+
+    public function test_deleted()
+    {
+        $response = $this->get(route('dashboard.sessions.deleted'));
+        $response->assertStatus(200);
+        $response->assertViewIs('dashboard.sessions.deleted');
+        $response->assertViewHas('sessions');
+    }
+
+    public function test_restore()
+    {
+        $session = Session::factory()->create();
+        $session->delete();
+        $response = $this->patch(route('dashboard.sessions.restore', $session->id));
+        $response->assertStatus(302);
+        $response->assertRedirect(route('dashboard.sessions.index'));
+        $this->assertDatabaseHas('sessions', ['deleted_at' => null]);
+        $this->assertNotSoftDeleted('sessions', ['id' => $session->id]);
+    }
+
+    public function test_force_delete()
+    {
+        $session = Session::factory()->create();
+        $session->delete();
+        $response = $this->delete(route('dashboard.sessions.force-delete', $session->id));
+        $response->assertStatus(302);
+        $response->assertRedirect(route('dashboard.sessions.deleted'));
+        $this->assertDatabaseMissing('sessions', ['id' => $session->id]);
+    }
 }
