@@ -66,4 +66,33 @@ class ClassRoomTest extends TestCase
         $response->assertRedirect(route('dashboard.classes.index'));
         $this->assertSoftDeleted('class_rooms', ['id' => $class->id]);
     }
+
+    public function test_deleted()
+    {
+        $response = $this->get(route('dashboard.classes.deleted'));
+        $response->assertStatus(200);
+        $response->assertViewIs('dashboard.class.deleted');
+        $response->assertViewHas('classes');
+    }
+
+    public function test_restore()
+    {
+        $class = ClassRoom::factory()->create();
+        $class->delete();
+        $response = $this->patch(route('dashboard.classes.restore', $class->id));
+        $response->assertStatus(302);
+        $response->assertRedirect(route('dashboard.classes.index'));
+        $this->assertDatabaseHas('class_rooms', ['deleted_at' => null]);
+        $this->assertNotSoftDeleted('class_rooms', ['id' => $class->id]);
+    }
+
+    public function test_force_delete()
+    {
+        $class = ClassRoom::factory()->create();
+        $class->delete();
+        $response = $this->delete(route('dashboard.classes.force-delete', $class->id));
+        $response->assertStatus(302);
+        $response->assertRedirect(route('dashboard.classes.deleted'));
+        $this->assertDatabaseMissing('class_rooms', ['id' => $class->id]);
+    }
 }

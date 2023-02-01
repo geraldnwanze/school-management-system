@@ -68,4 +68,33 @@ class SubjectTest extends TestCase
         $response->assertRedirect(route('dashboard.subjects.index'));
         $this->assertSoftDeleted('subjects', ['id' => $subject->id]);
     }
+
+    public function test_deleted()
+    {
+        $response = $this->get(route('dashboard.subjects.deleted'));
+        $response->assertStatus(200);
+        $response->assertViewIs('dashboard.subjects.deleted');
+        $response->assertViewHas('subjects');
+    }
+
+    public function test_restore()
+    {
+        $subject = Subject::factory()->create();
+        $subject->delete();
+        $response = $this->patch(route('dashboard.subjects.restore', $subject->id));
+        $response->assertStatus(302);
+        $response->assertRedirect(route('dashboard.subjects.index'));
+        $this->assertDatabaseHas('subjects', ['deleted_at' => null]);
+        $this->assertNotSoftDeleted('subjects', ['id' => $subject->id]);
+    }
+
+    public function test_force_delete()
+    {
+        $subject = Subject::factory()->create();
+        $subject->delete();
+        $response = $this->delete(route('dashboard.subjects.force-delete', $subject->id));
+        $response->assertStatus(302);
+        $response->assertRedirect(route('dashboard.subjects.deleted'));
+        $this->assertDatabaseMissing('subjects', ['id' => $subject->id]);
+    }
 }

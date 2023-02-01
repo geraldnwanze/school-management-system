@@ -81,4 +81,36 @@ class SubjectController extends Controller
             dd($th->getMessage());
         }
     }
+
+    public function deleted()
+    {
+        $subjects = Subject::onlyTrashed()->paginate(10);
+        return view('dashboard.subjects.deleted', compact('subjects'));
+    }
+
+    public function restore($subject)
+    {
+        try {
+            if (!Subject::onlyTrashed()->find($subject)->update(['deleted_at' => null])) {
+                return redirect()->route('dashboard.subjects.index')->with('error', 'something went wrong');
+            }
+            return redirect()->route('dashboard.subjects.index')->with('success', 'subject restored');
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+            dd($th->getMessage());
+        }
+    }
+
+    public function forceDelete($subject)
+    {
+        try {
+            if (!Subject::onlyTrashed()->find($subject)->forceDelete()) {
+                return redirect()->route('dashboard.subjects.deleted')->with('error', 'something went wrong');
+            }
+            return redirect()->route('dashboard.subjects.deleted')->with('success', 'subject permanently deleted');
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+            dd($th->getMessage());
+        }
+    }
 }

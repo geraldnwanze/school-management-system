@@ -11,5 +11,5 @@ class Session extends Model
 {
     use HasFactory, SoftDeletes, DefaultValueForCreatedByAndUpdatedBy;
 
-    protected $fillable = ['from', 'to', 'active'];
+    protected $fillable = ['from', 'to', 'active', 'deleted_at'];
 }

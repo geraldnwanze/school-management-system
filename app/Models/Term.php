@@ -11,5 +11,5 @@ class Term extends Model
 {
     use HasFactory, SoftDeletes, DefaultValueForCreatedByAndUpdatedBy;
 
-    protected $fillable = ['name', 'active'];
+    protected $fillable = ['name', 'active', 'deleted_at'];
 }

@@ -109,17 +109,16 @@
                 @auth
                     <ul class="metismenu" id="menu">
 
-                        <li>
-                            <h4 style="color:azure;">
-                                {{ auth()->user()->role }}
-                            </h4>
-                        </li>
+                    <li>
+                        <h4 style="color:azure;">
+                            {{ auth()->user()->role }}
+                        </h4>
+                    </li>
 
-                        <li>
-                            <a class="" href="{{ route('dashboard.' . auth()->user()->role . '.index') }}"
-                                aria-expanded="false"><i class="fa fa-dashboard"></i><span
-                                    class="nav-text">Dashboard</span></a>
-                        </li>
+                    <li>
+                        <a class="" href="{{ route('dashboard.'.auth()->user()->role.'.index') }}" aria-expanded="false"><i
+                                class="fa fa-dashboard"></i><span class="nav-text">Dashboard</span></a>
+                    </li>
 
                         @if (superadmin())
                             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
@@ -148,6 +147,30 @@
                                     <span class="nav-text">Classes</span>
                                 </a>
                             </li> --}}
+                            <li>
+                                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                                    <i class="fa fa-trash"></i>
+                                    <span class="nav-text">Deleted Data</span>
+                                </a>
+                                <ul aria-expanded="false">
+                                    <li>
+                                        <a href="{{ route('dashboard.sessions.deleted') }}">Sessions</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('dashboard.terms.deleted') }}">Terms</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('dashboard.classes.deleted') }}">Classes</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('dashboard.subjects.deleted') }}">Subjects</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('dashboard.grades.deleted') }}">Grades</a>
+                                    </li>
+                                </ul>
+                            </li>
+
                         @endif
 
                         @if (admin())
@@ -198,12 +221,13 @@
                             </li>
                         @endif
 
-                        <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-                                    class="fa fa-wrench"></i><span class="nav-text">Settings</span></a>
-                            <ul aria-expanded="false">
-                                <li><a href="#">Password</a></li>
-                            </ul>
-                        </li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
+                        class="fa fa-wrench"></i><span class="nav-text">Settings</span></a>
+                        <ul aria-expanded="false">
+                            <li><a href="#">Password</a></li>
+                        </ul>
+                    </li>
 
                     </ul>
                 @endauth
