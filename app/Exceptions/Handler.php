@@ -2,18 +2,21 @@
 
 namespace App\Exceptions;
 
+use App\Traits\ApiResponses;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
 {
+    use ApiResponses;
     /**
      * A list of the exception types that are not reported.
      *
      * @var array<int, class-string<Throwable>>
      */
     protected $dontReport = [
-        //
+        
     ];
 
     /**
@@ -34,8 +37,10 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        $this->reportable(function (Throwable $e) {
-            //
+        $this->renderable(function (NotFoundHttpException $e, $request) {
+            if ($request->wantsJson()) {
+                return $this->error('Record Not Found', 404);
+            }
         });
     }
 }

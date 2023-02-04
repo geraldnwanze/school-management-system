@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 
-use App\Http\Requests\StoreResultRequest;
-use App\Http\Requests\UpdateResultRequest;
-use App\Models\Result;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreStaffRequest;
+use App\Http\Requests\UpdateStaffRequest;
+use App\Models\Staff;
 
-class ResultController extends Controller
+class StaffController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +16,7 @@ class ResultController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.staff.index');
     }
 
     /**
@@ -31,10 +32,10 @@ class ResultController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreResultRequest  $request
+     * @param  \App\Http\Requests\StoreStaffRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreResultRequest $request)
+    public function store(StoreStaffRequest $request)
     {
         //
     }
@@ -42,10 +43,10 @@ class ResultController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Result  $result
+     * @param  \App\Models\Staff  $staff
      * @return \Illuminate\Http\Response
      */
-    public function show(Result $result)
+    public function show(Staff $staff)
     {
         //
     }
@@ -53,10 +54,10 @@ class ResultController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Result  $result
+     * @param  \App\Models\Staff  $staff
      * @return \Illuminate\Http\Response
      */
-    public function edit(Result $result)
+    public function edit(Staff $staff)
     {
         //
     }
@@ -64,11 +65,11 @@ class ResultController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateResultRequest  $request
-     * @param  \App\Models\Result  $result
+     * @param  \App\Http\Requests\UpdateStaffRequest  $request
+     * @param  \App\Models\Staff  $staff
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateResultRequest $request, Result $result)
+    public function update(UpdateStaffRequest $request, Staff $staff)
     {
         //
     }
@@ -76,10 +77,10 @@ class ResultController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Result  $result
+     * @param  \App\Models\Staff  $staff
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Result $result)
+    public function destroy(Staff $staff)
     {
         //
     }
