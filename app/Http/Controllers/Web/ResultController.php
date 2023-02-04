@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 
-use App\Http\Requests\StoreSuperAdminRequest;
-use App\Http\Requests\UpdateSuperAdminRequest;
-use App\Models\SuperAdmin;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreResultRequest;
+use App\Http\Requests\UpdateResultRequest;
+use App\Models\Result;
 
-class SuperAdminController extends Controller
+class ResultController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +16,7 @@ class SuperAdminController extends Controller
      */
     public function index()
     {
-        return view('dashboard.superadmin.index');
+        //
     }
 
     /**
@@ -31,10 +32,10 @@ class SuperAdminController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreSuperAdminRequest  $request
+     * @param  \App\Http\Requests\StoreResultRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreSuperAdminRequest $request)
+    public function store(StoreResultRequest $request)
     {
         //
     }
@@ -42,10 +43,10 @@ class SuperAdminController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\SuperAdmin  $superAdmin
+     * @param  \App\Models\Result  $result
      * @return \Illuminate\Http\Response
      */
-    public function show(SuperAdmin $superAdmin)
+    public function show(Result $result)
     {
         //
     }
@@ -53,10 +54,10 @@ class SuperAdminController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\SuperAdmin  $superAdmin
+     * @param  \App\Models\Result  $result
      * @return \Illuminate\Http\Response
      */
-    public function edit(SuperAdmin $superAdmin)
+    public function edit(Result $result)
     {
         //
     }
@@ -64,11 +65,11 @@ class SuperAdminController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateSuperAdminRequest  $request
-     * @param  \App\Models\SuperAdmin  $superAdmin
+     * @param  \App\Http\Requests\UpdateResultRequest  $request
+     * @param  \App\Models\Result  $result
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateSuperAdminRequest $request, SuperAdmin $superAdmin)
+    public function update(UpdateResultRequest $request, Result $result)
     {
         //
     }
@@ -76,10 +77,10 @@ class SuperAdminController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\SuperAdmin  $superAdmin
+     * @param  \App\Models\Result  $result
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SuperAdmin $superAdmin)
+    public function destroy(Result $result)
     {
         //
     }
