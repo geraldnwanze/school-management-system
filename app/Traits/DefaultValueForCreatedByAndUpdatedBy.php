@@ -11,6 +11,7 @@ trait DefaultValueForCreatedByAndUpdatedBy
         static::creating(function ($model) {
             $model->created_by = auth()->check() ? auth()->id() : 1;
             $model->updated_by = auth()->check() ? auth()->id() : 1;
+            $model->active = true;
         });
 
         static::updating(function ($model){

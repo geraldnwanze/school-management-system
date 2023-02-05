@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ClassRoomController;
 use App\Http\Controllers\Api\SubjectController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -38,5 +39,17 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::get('deleted', [SubjectController::class, 'deleted'])->name('deleted');
         Route::patch('{subject}/restore', [SubjectController::class, 'restore'])->name('restore');
         Route::delete('{subject}/force-delete', [SubjectController::class, 'forceDelete'])->name('force-delete');
+    });
+
+    Route::group(['prefix' => 'classes', 'as' => 'classes.'], function () {
+        Route::get('/', [ClassRoomController::class, 'index'])->name('index');
+        Route::post('store', [ClassRoomController::class, 'store'])->name('store');
+        Route::patch('{class}/update', [ClassRoomController::class, 'update'])->name('update');
+        Route::patch('{class}/toggle-status', [ClassRoomController::class, 'toggleStatus'])->name('toggle-status');
+        Route::delete('{class}/delete', [ClassRoomController::class, 'destroy'])->name('delete');
+        
+        Route::get('deleted', [ClassRoomController::class, 'deleted'])->name('deleted');
+        Route::patch('{class}/restore', [ClassRoomController::class, 'restore'])->name('restore');
+        Route::delete('{class}/force-delete', [ClassRoomController::class, 'forceDelete'])->name('force-delete');
     });
 });
