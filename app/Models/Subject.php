@@ -2,16 +2,16 @@
 
 namespace App\Models;
 
+use App\Traits\BelongsToUser;
 use App\Traits\DefaultValueForCreatedByAndUpdatedBy;
 use App\Traits\MakeDateReadable;
-use App\Traits\TransformCreatedByAndUpdatedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Subject extends Model
 {
-    use HasFactory, SoftDeletes, DefaultValueForCreatedByAndUpdatedBy, MakeDateReadable, TransformCreatedByAndUpdatedBy;
+    use HasFactory, SoftDeletes, DefaultValueForCreatedByAndUpdatedBy, MakeDateReadable, BelongsToUser;
 
     protected $fillable = ['name', 'active', 'deleted_at'];
 
