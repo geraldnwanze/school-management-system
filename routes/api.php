@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ClassRoomController;
+use App\Http\Controllers\Api\SessionController;
 use App\Http\Controllers\Api\SubjectController;
 use App\Http\Controllers\Api\TermController;
 use Illuminate\Http\Request;
@@ -63,5 +64,17 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::get('deleted', [TermController::class, 'deleted'])->name('deleted');
         Route::patch('{term}/restore', [TermController::class, 'restore'])->name('restore');
         Route::delete('{term}/force-delete', [TermController::class, 'forceDelete'])->name('force-delete');
+    });
+
+    Route::group(['prefix' => 'sessions', 'as' => 'sessions.'], function () {
+        Route::get('/', [SessionController::class, 'index'])->name('index');
+        Route::post('store', [SessionController::class, 'store'])->name('store');
+        Route::patch('{session}/update', [SessionController::class, 'update'])->name('update');
+        Route::patch('{session}/toggle-status', [SessionController::class, 'toggleStatus'])->name('toggle-status');
+        Route::delete('{session}/delete', [SessionController::class, 'destroy'])->name('delete');
+
+        Route::get('deleted', [SessionController::class, 'deleted'])->name('deleted');
+        Route::patch('{session}/restore', [SessionController::class, 'restore'])->name('restore');
+        Route::delete('{session}/force-delete', [SessionController::class, 'forceDelete'])->name('force-delete');
     });
 });

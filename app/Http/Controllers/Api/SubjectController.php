@@ -26,11 +26,6 @@ class SubjectController extends ApiController
         return new SubjectResource($subject);
     }
 
-    public function show(Subject $subject)
-    {
-        return new SubjectResource($subject);
-    }
-
     public function update(UpdateSubjectRequest $request, Subject $subject)
     {
         $subject->update($request->validated());
