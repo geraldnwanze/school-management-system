@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ClassRoomController;
 use App\Http\Controllers\Api\SubjectController;
+use App\Http\Controllers\Api\TermController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -31,7 +32,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::group(['prefix' => 'subjects', 'as' => 'subjects.'], function () {
         Route::get('/', [SubjectController::class, 'index'])->name('index');
         Route::post('store', [SubjectController::class, 'store'])->name('store');
-        Route::get('{subject}', [SubjectController::class, 'show'])->name('show');
         Route::patch('{subject}/update', [SubjectController::class, 'update'])->name('update');
         Route::patch('{subject}/toggle-status', [SubjectController::class, 'toggleStatus'])->name('toggle-status');
         Route::delete('{subject}/delete', [SubjectController::class, 'destroy'])->name('delete');
@@ -51,5 +51,17 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::get('deleted', [ClassRoomController::class, 'deleted'])->name('deleted');
         Route::patch('{class}/restore', [ClassRoomController::class, 'restore'])->name('restore');
         Route::delete('{class}/force-delete', [ClassRoomController::class, 'forceDelete'])->name('force-delete');
+    });
+
+    Route::group(['prefix' => 'terms', 'as' => 'terms.'], function () {
+        Route::get('/', [TermController::class, 'index'])->name('index');
+        Route::post('store', [TermController::class, 'store'])->name('store');
+        Route::patch('{term}/update', [TermController::class, 'update'])->name('update');
+        Route::patch('{term}/toggle-status', [TermController::class, 'toggleStatus'])->name('toggle-status');
+        Route::delete('{term}/delete', [TermController::class, 'destroy'])->name('delete');
+
+        Route::get('deleted', [TermController::class, 'deleted'])->name('deleted');
+        Route::patch('{term}/restore', [TermController::class, 'restore'])->name('restore');
+        Route::delete('{term}/force-delete', [TermController::class, 'forceDelete'])->name('force-delete');
     });
 });
