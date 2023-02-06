@@ -34,11 +34,6 @@ class SessionController extends Controller
         }
     }
 
-    public function show(Session $session)
-    {
-        //
-    }
-
     public function edit(Session $session)
     {
         return view('dashboard.sessions.edit', compact('session'));

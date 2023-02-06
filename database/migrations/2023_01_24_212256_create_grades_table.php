@@ -20,7 +20,7 @@ class CreateGradesTable extends Migration
             $table->double('max');
             $table->unsignedBigInteger('created_by');
             $table->unsignedBigInteger('updated_by');
-            $table->boolean('active');
+            $table->boolean('active')->default(true);
             $table->softDeletes();
             $table->timestamps();
         });
