@@ -1,15 +1,15 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\ClassRoomController;
-use App\Http\Controllers\SessionController;
-use App\Http\Controllers\GradeController;
-use App\Http\Controllers\StaffController;
-use App\Http\Controllers\StudentController;
-use App\Http\Controllers\SubjectController;
-use App\Http\Controllers\SuperAdminController;
-use App\Http\Controllers\TermController;
+use App\Http\Controllers\Web\AdminController;
+use App\Http\Controllers\Web\Auth\AuthController;
+use App\Http\Controllers\Web\ClassRoomController;
+use App\Http\Controllers\Web\SessionController;
+use App\Http\Controllers\Web\GradeController;
+use App\Http\Controllers\Web\StaffController;
+use App\Http\Controllers\Web\StudentController;
+use App\Http\Controllers\Web\SubjectController;
+use App\Http\Controllers\Web\SuperAdminController;
+use App\Http\Controllers\Web\TermController;
 use Illuminate\Support\Facades\Route;
 
 /*

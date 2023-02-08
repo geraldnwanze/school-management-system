@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreSessionRequest;
 use App\Http\Requests\UpdateSessionRequest;
 use App\Models\Session;
@@ -31,11 +32,6 @@ class SessionController extends Controller
             Log::error($th->getMessage());
             return back()->with('error', 'something went wrong');
         }
-    }
-
-    public function show(Session $session)
-    {
-        //
     }
 
     public function edit(Session $session)
