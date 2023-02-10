@@ -46,6 +46,22 @@ Route::group(['as' => 'dashboard.', 'middleware' => 'auth'], function () {
         Route::get('/', [StudentController::class, 'index'])->name('index');
     });
 
+    Route::group(['prefix' => 'staffs', 'as' => 'staffs.'], function (){
+        Route::get('/', [StaffController::class, 'index'])->name('index');
+        Route::get('create', [StaffController::class, 'create'])->name('create');
+        Route::post('create', [StaffController::class, 'store']);
+        Route::get('{staff}/edit', [StaffController::class, 'edit'])->name('edit');
+        Route::patch('{staff}/update', [StaffController::class, 'update'])->name('update');
+        Route::delete('{staff}/delete', [StaffController::class, 'destroy'])->name('delete');
+
+    });
+
+    Route::group(['prefix' => 'students', 'as' => 'students'], function(){
+        Route::get('/', [StudentController::class, 'index'])->name('index');
+        Route::get('create', [StudentController::class, 'create'])->name('create');
+        Route::post('create', [StudentController::class, 'store']);
+    });
+
     Route::group(['prefix' => 'classes', 'as' => 'classes.'], function () {
         Route::get('/', [ClassRoomController::class, 'index'])->name('index');
         Route::get('create', [ClassRoomController::class, 'create'])->name('create');

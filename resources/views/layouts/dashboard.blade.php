@@ -107,7 +107,7 @@
             <div class="quixnav-scroll">
 
                 @auth
-                <ul class="metismenu" id="menu">
+                    <ul class="metismenu" id="menu">
 
                     <li>
                         <h4 style="color:azure;">
@@ -119,130 +119,107 @@
                         <a class="" href="{{ route('dashboard.'.auth()->user()->role.'.index') }}" aria-expanded="false"><i
                                 class="fa fa-dashboard"></i><span class="nav-text">Dashboard</span></a>
                     </li>
-                    
-                    @if(superadmin())
-                    <li>
-                        <a href="{{ route('dashboard.sessions.index') }}">
-                            <i class="fa fa-calendar"></i>
-                            <span class="nav-text">Sessions</span>
-                        </a>
-                    </li>
 
-                    <li>
-                        <a href="{{ route('dashboard.terms.index') }}">
-                            <i class="fa fa-calendar"></i>
-                            <span class="nav-text">Terms</span>
-                        </a>
-                    </li>
+                        @if (superadmin())
+                            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
+                                        class="fa fa-users"></i><span class="nav-text">Users</span></a>
+                                <ul aria-expanded="false">
+                                    <li><a href="{{route('dashboard.staff.index')}}">Staff</a></li>
+                                    <li><a href="{{route('dashboard.student.index')}}">Student</a></li>
+                                </ul>
+                            </li>
 
-                    <li>
-                        <a class="" href="{{ route('dashboard.classes.index') }}" >
-                            <i class="fa fa-home"></i>
-                            <span class="nav-text">Classes</span>
-                        </a>
-                    </li>
+                            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
+                                        class="fa fa-gears"></i><span class="nav-text">School Setup</span></a>
+                                <ul aria-expanded="false">
+                                    <li><a href="#">School Profile</a></li>
+                                    <li><a href="{{ route('dashboard.classes.index') }}">Classes</a></li>
+                                    <li><a href="{{ route('dashboard.grades.index') }}">Grade Setup</a></li>
+                                    <li><a href="{{ route('dashboard.subjects.index') }}">Subjects</a></li>
+                                    <li><a href="{{ route('dashboard.terms.index') }}">Terms</a></li>
+                                    <li><a href="{{ route('dashboard.sessions.index') }}">Sessions</a></li>
+                                </ul>
+                            </li>
 
-                    <li>
-                        <a href="{{ route('dashboard.subjects.index') }}">
-                            <i class="fa fa-book"></i>
-                            <span class="nav-text">Subjects</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="{{ route('dashboard.grades.index') }}">
-                            <i class="fa fa-list"></i>
-                            <span class="nav-text">Grades</span>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="#" >
-                            <i class="fa fa-users"></i>
-                            <span class="nav-text">Users</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="fa fa-trash"></i>
-                            <span class="nav-text">Deleted Data</span>
-                        </a>
-                        <ul aria-expanded="false">
+                            {{-- <li>
+                                <a class="" href="{{ route('dashboard.classes.index') }}">
+                                    <i class="fa fa-home"></i>
+                                    <span class="nav-text">Classes</span>
+                                </a>
+                            </li> --}}
                             <li>
-                                <a href="{{ route('dashboard.sessions.deleted') }}">Sessions</a>
+                                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                                    <i class="fa fa-trash"></i>
+                                    <span class="nav-text">Deleted Data</span>
+                                </a>
+                                <ul aria-expanded="false">
+                                    <li>
+                                        <a href="{{ route('dashboard.sessions.deleted') }}">Sessions</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('dashboard.terms.deleted') }}">Terms</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('dashboard.classes.deleted') }}">Classes</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('dashboard.subjects.deleted') }}">Subjects</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('dashboard.grades.deleted') }}">Grades</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                        @endif
+
+                        @if (admin())
+                            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
+                                        class="fa fa-users"></i><span class="nav-text">Users</span></a>
+                                <ul aria-expanded="false">
+                                    <li><a href="{{route('dashboard.staff.index')}}">Staff</a></li>
+                                    <li><a href="{{route('dashboard.student.index')}}">Student</a></li>
+                                </ul>
+                            </li>
+
+                            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
+                                        class="fa fa-gears"></i><span class="nav-text">School Setup</span></a>
+                                <ul aria-expanded="false">
+                                    <li><a href="#">School Profile</a></li>
+                                    <li><a href="{{ route('dashboard.classes.index') }}">Classes</a></li>
+                                    <li><a href="{{ route('dashboard.grades.index') }}">Grade Setup</a></li>
+                                    <li><a href="{{ route('dashboard.subjects.index') }}">Subjects</a></li>
+                                    <li><a href="{{ route('dashboard.terms.index') }}">Terms</a></li>
+                                    <li><a href="{{ route('dashboard.sessions.index') }}">Sessions</a></li>
+                                </ul>
+                            </li>
+                        @endif
+
+                        @if (staff())
+                            <li>
+                                <a class="" href="#" aria-expanded="false"><i class="fa fa-user"></i><span
+                                        class="nav-text">Staff Profile</span></a>
                             </li>
                             <li>
-                                <a href="{{ route('dashboard.terms.deleted') }}">Terms</a>
+                                <a class="" href="#" aria-expanded="false"><i class="fa fa-list"></i><span
+                                        class="nav-text">View Subjects</span></a>
                             </li>
                             <li>
-                                <a href="{{ route('dashboard.classes.deleted') }}">Classes</a>
+                                <a class="" href="#" aria-expanded="false"><i class="fa fa-edit"></i><span
+                                        class="nav-text">Enter Result</span></a>
+                            </li>
+                        @endif
+
+                        @if (student())
+                            <li>
+                                <a class="" href="#" aria-expanded="false"><i class="fa fa-user"></i><span
+                                        class="nav-text">Student Profile</span></a>
                             </li>
                             <li>
-                                <a href="{{ route('dashboard.subjects.deleted') }}">Subjects</a>
+                                <a class="" href="#" aria-expanded="false"><i class="fa fa-list"></i><span
+                                        class="nav-text">Check Result</span></a>
                             </li>
-                            <li>
-                                <a href="{{ route('dashboard.grades.deleted') }}">Grades</a>
-                            </li>
-                        </ul>
-                    </li>
-                    @endif
-
-                    @if(admin())
-                        <li>
-                            <a class="" href="#" aria-expanded="false"><i
-                                    class="fa fa-edit"></i><span class="nav-text">Create Class</span></a>
-                        </li>
-                        
-                        <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-                                    class="fa fa-gears"></i><span class="nav-text">Create User</span></a>
-                            <ul aria-expanded="false">
-                                <li><a href="#">Staff</a></li>
-                                <li><a href="#">Student</a></li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a href="{{ route('dashboard.grades.index') }}">
-                                <i class="fa fa-list"></i>
-                                <span class="nav-text">Grades</span>
-                            </a>
-                        </li>
-                        
-                        <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-                            class="fa fa-gears"></i><span class="nav-text">Subject</span></a>
-                            <ul aria-expanded="false">
-                                <li><a href="#">Create Subject</a></li>
-                                <li><a href="#">Assign Subject</a></li>
-                            </ul>
-                        </li>
-                    @endif
-
-                    @if(staff())
-                        <li>
-                            <a class="" href="#" aria-expanded="false"><i
-                                    class="fa fa-user"></i><span class="nav-text">Staff Profile</span></a>
-                        </li>
-                        <li>
-                            <a class="" href="#" aria-expanded="false"><i
-                                    class="fa fa-list"></i><span class="nav-text">View Subjects</span></a>
-                        </li>
-                        <li>
-                            <a class="" href="#" aria-expanded="false"><i
-                                    class="fa fa-edit"></i><span class="nav-text">Enter Result</span></a>
-                        </li>
-                    @endif
-
-                    @if(student())
-                        <li>
-                            <a class="" href="#" aria-expanded="false"><i
-                                    class="fa fa-user"></i><span class="nav-text">Student Profile</span></a>
-                        </li>
-                        <li>
-                            <a class="" href="#" aria-expanded="false"><i
-                                    class="fa fa-list"></i><span class="nav-text">Check Result</span></a>
-                        </li>
-                    @endif
+                        @endif
 
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
@@ -252,7 +229,7 @@
                         </ul>
                     </li>
 
-                </ul>
+                    </ul>
                 @endauth
             </div>
 

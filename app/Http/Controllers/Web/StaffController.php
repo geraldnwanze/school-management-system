@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreStaffRequest;
 use App\Http\Requests\UpdateStaffRequest;
 use App\Models\Staff;
+use App\Models\State;
 
 class StaffController extends Controller
 {
@@ -16,7 +17,8 @@ class StaffController extends Controller
      */
     public function index()
     {
-        return view('dashboard.staff.index');
+        $data['staffs'] = Staff::all();
+        return view('dashboard.staff.index', $data);
     }
 
     /**
@@ -26,7 +28,9 @@ class StaffController extends Controller
      */
     public function create()
     {
-        //
+        $data['states'] = State::all();
+        // $data['lga'] = ;
+        return view('dashboard.staff.create', $data);
     }
 
     /**

@@ -13,7 +13,7 @@ class StoreStaffRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return authorized();
     }
 
     /**
@@ -24,7 +24,17 @@ class StoreStaffRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            
         ];
+    }
+
+    public function attributes()
+    {
+        
+    }
+
+    public function messages()
+    {
+        
     }
 }
