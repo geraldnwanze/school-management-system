@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
             SubjectSeeder::class,
             SessionSeeder::class,
             TermSeeder::class,
-            GradeSeeder::class
+            GradeSeeder::class,
+            StaffSeeder::class
         ]);
     }
 }

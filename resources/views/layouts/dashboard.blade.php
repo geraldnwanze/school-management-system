@@ -124,8 +124,8 @@
                             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                                         class="fa fa-users"></i><span class="nav-text">Users</span></a>
                                 <ul aria-expanded="false">
-                                    <li><a href="#">Create Staff</a></li>
-                                    <li><a href="#">Create Student</a></li>
+                                    <li><a href="{{route('dashboard.staff.index')}}">Staff</a></li>
+                                    <li><a href="{{route('dashboard.student.index')}}">Student</a></li>
                                 </ul>
                             </li>
 
@@ -177,8 +177,8 @@
                             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                                         class="fa fa-users"></i><span class="nav-text">Users</span></a>
                                 <ul aria-expanded="false">
-                                    <li><a href="#">Create Staff</a></li>
-                                    <li><a href="#">Create Student</a></li>
+                                    <li><a href="{{route('dashboard.staff.index')}}">Staff</a></li>
+                                    <li><a href="{{route('dashboard.student.index')}}">Student</a></li>
                                 </ul>
                             </li>
 
