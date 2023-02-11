@@ -23,19 +23,19 @@ class StaffSeeder extends Seeder
                 'gender' => 'male', 
                 'phone_number' => +245890044579,
                 'nationality' => 'Canadian',
-                'state' => 2,
-                'lga' => 4,
+                'state_id' => 4,
+                'lga_id' => 47,
             ],
             [
                 'surname' => 'Adams', 
                 'firstname' => 'petra', 
                 'othername' => 'jane', 
                 'email' => 'petrajane@gmail.com',
-                'gender' => 'Female', 
+                'gender' => 'female', 
                 'phone_number' => +245890044579,
                 'nationality' => 'Nigerian',
-                'state' => 2,
-                'lga' => 4,
+                'state_id' => 4,
+                'lga_id' => 73,
             ]
         ];
         foreach($values as $value){

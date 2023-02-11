@@ -19,13 +19,23 @@ class Staff extends Model
         'gender', 
         'phone_number',
         'nationality',
-        'state',
-        'lga',
+        'state_id',
+        'lga_id',
         'deleted_at'
     ];
 
     public function getFullNameAttribute()
     {
         return ucfirst($this->surname).' '.ucfirst($this->firstname).' '.ucfirst($this->othername);
+    }
+
+    public function state()
+    {
+        return $this->belongsTo(State::class);
+    }
+
+    public function lga()
+    {
+        return $this->belongsTo(LGA::class);
     }
 }

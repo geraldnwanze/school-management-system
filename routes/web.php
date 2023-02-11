@@ -32,6 +32,7 @@ Route::group(['as' => 'auth.'], function () {
 
 Route::group(['as' => 'dashboard.', 'middleware' => 'auth'], function () {
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/get-lga/{state}', [StaffController::class, 'getLGA']);
 
     Route::group(['prefix' => 'superadmin', 'as' => 'superadmin.', 'middleware' => ['superadmin']], function () {
         Route::get('/', [SuperAdminController::class, 'index'])->name('index');

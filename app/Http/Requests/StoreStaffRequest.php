@@ -24,17 +24,29 @@ class StoreStaffRequest extends FormRequest
     public function rules()
     {
         return [
-            
+            'surname' => 'required',
+            'firstname' => 'required',
+            // 'othername' => 'required',
+            'email' => 'required|email|unique:staff,email',
+            'gender' => 'required',
+            'phone_number' => 'required',
+            'nationality' => 'required',
+            'state_id' => 'required',
+            'lga_id' => 'required',
         ];
     }
 
     public function attributes()
     {
-        
+        return [
+
+        ];
     }
 
     public function messages()
     {
-        
+        return [
+            'email.unique' => 'A staff already exist with this email address'
+        ];
     }
 }

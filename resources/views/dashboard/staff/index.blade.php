@@ -6,16 +6,17 @@
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">List of Staff</h4>
-                    <a href="{{ route('dashboard.staffs.create') }}" class="btn btn-sm btn-primary">Add new staff</a>
+                    <a href="{{ route('dashboard.staffs.create') }}">Add new staff</a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-hover">
+                        <table class="table table-hover table-bordered">
                             <thead>
                                 <tr>
                                     <th>#</th>
                                     <th>Full Name</th>
                                     <th>Email</th>
+                                    <th>Gender</th>
                                     <th>Assign</th>
                                     <th>Action</th>
                                 </tr>
@@ -27,13 +28,14 @@
                                         <td>{{ $key + 1 }}</td>
                                         <td>{{ $staff->full_name }}</td>
                                         <td>{{ $staff->email }}</td>
+                                        <td>{{$staff->gender}}</td>
                                         <td>
                                             <a href="{{ route('dashboard.staffs.edit', [$staff->id]) }}" class="btn btn-success btn-sm">
-                                                Class
+                                                <span class="fa fa-users"></span> Assign Class/Subject
                                             </a>
-                                            <a href="{{ route('dashboard.staffs.edit', [$staff->id]) }}" class="btn btn-info btn-sm">
-                                                Subject
-                                            </a>
+                                            {{-- <a href="{{ route('dashboard.staffs.edit', [$staff->id]) }}" class="btn btn-info btn-sm">
+                                                <span class="fa fa-book"></span> Assign Subject
+                                            </a> --}}
                                         </td>
                                         <td>
                                             
