@@ -17,13 +17,15 @@ class CreateStaffTable extends Migration
             $table->id();
             $table->string('surname');
             $table->string('firstname');
-            $table->string('othername');
+            $table->string('othername')->nullable();
             $table->string('email')->unique()->nullable();
             $table->string('gender');
             $table->string('phone_number');
             $table->string('nationality');
-            $table->integer('state');
-            $table->integer('lga');
+            $table->unsignedBigInteger('state_id');
+            $table->foreign('state_id')->references('id')->on('states');
+            $table->unsignedBigInteger('lga_id');
+            $table->foreign('lga_id')->references('id')->on('l_g_a_s');
             $table->unsignedBigInteger('created_by');
             $table->unsignedBigInteger('updated_by');
             $table->boolean('active')->default(true);

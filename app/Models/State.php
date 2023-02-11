@@ -17,4 +17,9 @@ class State extends Model
     {
         return $this->hasMany(LGA::class);
     }
+
+    public function staff()
+    {
+        return $this->hasMany(Staff::class);
+    }
 }

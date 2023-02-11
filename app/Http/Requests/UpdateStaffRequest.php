@@ -13,7 +13,7 @@ class UpdateStaffRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return authorized();
     }
 
     /**
@@ -24,7 +24,29 @@ class UpdateStaffRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'surname' => 'required',
+            'firstname' => 'required',
+            'othername' => '',
+            // 'email' => 'required|email|unique:staff,email',
+            'gender' => 'required',
+            'phone_number' => 'required',
+            'nationality' => 'required',
+            'state_id' => 'required',
+            'lga_id' => 'required',
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            // 'email.unique' => 'user with email address already exists'
         ];
     }
 }

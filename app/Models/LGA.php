@@ -17,4 +17,9 @@ class LGA extends Model
     {
         return $this->belongsTo(State::class);
     }
+
+    public function staff()
+    {
+        return $this->hasMany(Staff::class);
+    }
 }
