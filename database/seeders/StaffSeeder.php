@@ -16,6 +16,7 @@ class StaffSeeder extends Seeder
     {
         $values = [
             [
+                'user_id' => 3,
                 'surname' => 'Joe', 
                 'firstname' => 'pharel', 
                 'othername' => 'wilson', 
@@ -27,6 +28,7 @@ class StaffSeeder extends Seeder
                 'lga_id' => 47,
             ],
             [
+                'user_id' => 4,
                 'surname' => 'Adams', 
                 'firstname' => 'petra', 
                 'othername' => 'jane', 

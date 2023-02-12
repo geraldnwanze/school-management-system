@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateStaffRequest;
 use App\Models\LGA;
 use App\Models\Staff;
 use App\Models\State;
+use App\Models\User;
 
 class StaffController extends Controller
 {
@@ -52,10 +53,29 @@ class StaffController extends Controller
      */
     public function store(StoreStaffRequest $request)
     {
-        // $request->validated();
+        $request->validated();
         try {
-            $storeStaff = Staff::create($request->validated());
-            if($storeStaff){
+            $storeStaffAsUser = User::create([
+                'role' => User::STAFF,
+                'username' => $request->username,
+                'email' => $request->email,
+                'password' => $request->password
+            ]);
+            // dd($storeStaffAsUser);
+            $storeStaff = Staff::create([
+                'user_id' => $storeStaffAsUser->id,
+                'surname' => $request->surname,
+                'firstname' => $request->firstname,
+                'othername' => $request->othername,
+                'email' => $request->email,
+                'gender' => $request->gender,
+                'phone_number' => $request->phone_number,
+                'nationality' => $request->nationality,
+                'state_id' => $request->state_id,
+                'lga_id' => $request->lga_id,
+            ]);
+
+            if($storeStaffAsUser && $storeStaff){
                 return back()->with('success', 'You successfully created new staff');
             }
         } catch (\Throwable $th) {

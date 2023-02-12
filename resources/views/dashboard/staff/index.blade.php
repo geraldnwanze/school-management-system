@@ -30,12 +30,10 @@
                                         <td>{{ $staff->email }}</td>
                                         <td>{{$staff->gender}}</td>
                                         <td>
-                                            <a href="{{ route('dashboard.staffs.edit', [$staff->id]) }}" class="btn btn-success btn-sm">
+                                            <a href="{{ route('dashboard.staffs.assignSubject', [$staff->id]) }}" class="btn btn-success btn-sm">
                                                 <span class="fa fa-users"></span> Assign Class/Subject
                                             </a>
-                                            {{-- <a href="{{ route('dashboard.staffs.edit', [$staff->id]) }}" class="btn btn-info btn-sm">
-                                                <span class="fa fa-book"></span> Assign Subject
-                                            </a> --}}
+                                           
                                         </td>
                                         <td>
                                             

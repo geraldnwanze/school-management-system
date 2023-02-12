@@ -15,4 +15,8 @@ class Subject extends Model
 
     protected $fillable = ['name', 'active', 'deleted_at'];
 
+    public function assignClassAndSubject()
+    {
+        return $this->hasMany(AssignClassAndSubject::class);
+    }
 }

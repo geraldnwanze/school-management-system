@@ -35,12 +35,26 @@
                                     <input type="email" name="email" value="{{old('email')}}" class="form-control">
                                 </div>
                                 <div class="form-group col-md-4">
+                                    <label>Username</label>
+                                    <input type="text" name="username" value="{{old('username')}}" class="form-control">
+                                </div>
+                                <div class="form-group col-md-4">
                                     <label>Gender</label>
                                     <select name="gender" id="" class="form-control">
                                         <option value="">--Select--</option>
                                         <option value="male">Male</option>
                                         <option value="female">Female</option>
                                     </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label>Password</label>
+                                    <input type="password" name="password" value="" class="form-control" placeholder="*****">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Confirm Password</label>
+                                    <input type="password" name="password_confirmation" value="" class="form-control" placeholder="*****">
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label>Phone</label>

@@ -17,4 +17,10 @@ class ClassRoom extends Model
 
     protected $fillable = ['name', 'active', 'deleted_at'];
 
+    //relationship shows that classroom has many assignclassandsubject assigned
+    public function assignClassAndSubject()
+    {
+        return $this->hasMany(AssignClassAndSubject::class);
+    }
+
 }

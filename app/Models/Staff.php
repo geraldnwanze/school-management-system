@@ -12,6 +12,7 @@ class Staff extends Model
     use HasFactory, SoftDeletes, DefaultValueForCreatedByAndUpdatedBy;
 
     protected $fillable = [
+        'user_id',
         'surname', 
         'firstname', 
         'othername', 
