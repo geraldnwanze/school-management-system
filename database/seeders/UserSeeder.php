@@ -29,8 +29,14 @@ class UserSeeder extends Seeder
             ],
             [
                 'role' => User::STAFF,
-                'username' => User::STAFF,
-                'email' => User::STAFF.'@gmail.com',
+                'username' => 'staff1',
+                'email' => 'staff1@gmail.com',
+                'password' => 123456,
+            ],
+            [
+                'role' => User::STAFF,
+                'username' => 'staff2',
+                'email' => 'staff2@gmail.com',
                 'password' => 123456,
             ],
             [

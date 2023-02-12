@@ -14,6 +14,24 @@ class SubjectSeeder extends Seeder
      */
     public function run()
     {
-        Subject::factory()->create();
+        // Subject::factory()->create();
+        $subjects = [
+            [
+                'name' => 'English'
+            ],
+            [
+                'name' => 'Mathematics'
+            ],
+            [
+                'name' => 'French'
+            ],
+            [
+                'name' => 'Social studies'
+            ]
+        ];
+
+        foreach ($subjects as $key => $value) {
+            Subject::create($value);
+        }
     }
 }

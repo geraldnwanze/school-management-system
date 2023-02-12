@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Web\AdminController;
+use App\Http\Controllers\Web\AssignClassAndSubjectController;
 use App\Http\Controllers\Web\Auth\AuthController;
 use App\Http\Controllers\Web\ClassRoomController;
 use App\Http\Controllers\Web\SessionController;
@@ -54,6 +55,11 @@ Route::group(['as' => 'dashboard.', 'middleware' => 'auth'], function () {
         Route::get('{staff}/edit', [StaffController::class, 'edit'])->name('edit');
         Route::patch('{staff}/update', [StaffController::class, 'update'])->name('update');
         Route::delete('{staff}/delete', [StaffController::class, 'destroy'])->name('delete');
+
+        //assign class and subject
+        Route::get('{staff}/assign-class-subject', [AssignClassAndSubjectController::class, 'index'])->name('assignSubject');
+        Route::post('assign-class-subject', [AssignClassAndSubjectController::class, 'store'])->name('saveAssigned');
+        Route::patch('edit-assigned-class-subject/{assignClassAndSubject}', [AssignClassAndSubjectController::class, 'update'])->name('updateAssigned');
 
     });
 
