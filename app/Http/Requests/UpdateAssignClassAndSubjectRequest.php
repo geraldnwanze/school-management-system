@@ -25,7 +25,7 @@ class UpdateAssignClassAndSubjectRequest extends FormRequest
     {
         return [
             'session' => 'required',
-            'user_id' => 'required',
+            'staff_id' => 'required',
             'class_room_id' => 'required',
             'subject_id' => 'required'
         ];

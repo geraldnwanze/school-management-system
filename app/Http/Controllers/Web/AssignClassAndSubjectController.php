@@ -22,8 +22,17 @@ class AssignClassAndSubjectController extends Controller
         $data['staff'] = $staff;
         $data['classes'] = ClassRoom::all();
         $data['subjects'] = Subject::all();
-        $data['assignedClassAndSubject'] = AssignClassAndSubject::where('user_id', $staff->id)->get();
+        $data['assignedClassAndSubject'] = AssignClassAndSubject::where('staff_id', $staff->id)->get();
         return view('dashboard.staff.assign_class_and_subject', $data);
+    }
+
+    public function alreadyAssigned()
+    {
+        $staffs = Staff::all();
+        $classes = ClassRoom::all();
+        $subjects = Subject::all();
+        $assigned = AssignClassAndSubject::with('classRoom', 'subject', 'staff')->paginate(50);
+        return view('dashboard.staff.already_assigned_class_and_subject', compact('assigned', 'staffs', 'classes', 'subjects'));
     }
 
     /**

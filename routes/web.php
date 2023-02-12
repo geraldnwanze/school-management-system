@@ -60,6 +60,7 @@ Route::group(['as' => 'dashboard.', 'middleware' => 'auth'], function () {
         Route::get('{staff}/assign-class-subject', [AssignClassAndSubjectController::class, 'index'])->name('assignSubject');
         Route::post('assign-class-subject', [AssignClassAndSubjectController::class, 'store'])->name('saveAssigned');
         Route::patch('edit-assigned-class-subject/{assignClassAndSubject}', [AssignClassAndSubjectController::class, 'update'])->name('updateAssigned');
+        Route::get('already-assigned', [AssignClassAndSubjectController::class, 'alreadyAssigned'])->name('alreadyAssigned');
 
     });
 

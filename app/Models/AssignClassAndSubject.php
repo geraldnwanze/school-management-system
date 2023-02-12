@@ -10,8 +10,13 @@ class AssignClassAndSubject extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'class_room_id', 'subject_id', 'session'
+        'staff_id', 'class_room_id', 'subject_id', 'session'
     ];
+
+    public function staff()
+    {
+        return $this->belongsTo(Staff::class);
+    }
 
     //relationship shows that assignclassandsubject belongs to classroom and belongs to a subject
     public function classRoom()
