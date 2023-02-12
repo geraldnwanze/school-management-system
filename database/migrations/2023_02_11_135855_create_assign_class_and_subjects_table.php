@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('assign_class_and_subjects', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('staff_id')->nullable();
+            $table->foreign('staff_id')->references('id')->on('staff');
             $table->unsignedBigInteger('class_room_id');
             $table->foreign('class_room_id')->references('id')->on('class_rooms');
             $table->unsignedBigInteger('subject_id');

@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">Assign Subject and Class</h4>
-                    <a href="#"> <span class="fa fa-list"></span> Already Assigned</a>
+                    <a href="{{route('dashboard.staffs.alreadyAssigned')}}"> <span class="fa fa-list"></span> Already Assigned</a>
                 </div>
                 <div class="card-body">
                     <div class="basic-form">
@@ -22,7 +22,7 @@
                                 <div class="form-group col-md-6">
                                     <label for="">Staff</label>
                                     <input type="text" value="{{ $staff->full_name }}" readonly class="form-control">
-                                    <input type="hidden" name="user_id" value="{{ $staff->id }}">
+                                    <input type="hidden" name="staff_id" value="{{ $staff->id }}">
                                 </div>
                             </div>
 
@@ -151,7 +151,7 @@
                                                                 <label for="">Staff</label>
                                                                 <input type="text" value="{{ $staff->full_name }}"
                                                                     readonly class="form-control">
-                                                                <input type="hidden" name="user_id"
+                                                                <input type="hidden" name="staff_id"
                                                                     value="{{ $staff->id }}">
                                                             </div>
                                                         </div>
