@@ -138,6 +138,7 @@
                                     <li><a href="{{ route('dashboard.subjects.index') }}">Subjects</a></li>
                                     <li><a href="{{ route('dashboard.terms.index') }}">Terms</a></li>
                                     <li><a href="{{ route('dashboard.sessions.index') }}">Sessions</a></li>
+                                    <li><a href="#">Set Active Session</a></li>
                                 </ul>
                             </li>
 

@@ -64,7 +64,7 @@ Route::group(['as' => 'dashboard.', 'middleware' => 'auth'], function () {
 
     });
 
-    Route::group(['prefix' => 'students', 'as' => 'students'], function(){
+    Route::group(['prefix' => 'students', 'as' => 'students.'], function(){
         Route::get('/', [StudentController::class, 'index'])->name('index');
         Route::get('create', [StudentController::class, 'create'])->name('create');
         Route::post('create', [StudentController::class, 'store']);

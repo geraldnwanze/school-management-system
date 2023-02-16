@@ -12,11 +12,6 @@ use App\Models\Subject;
 
 class AssignClassAndSubjectController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Staff $staff)
     {
         $data['staff'] = $staff;
@@ -35,29 +30,21 @@ class AssignClassAndSubjectController extends Controller
         return view('dashboard.staff.already_assigned_class_and_subject', compact('assigned', 'staffs', 'classes', 'subjects'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreAssignClassAndSubjectRequest  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreAssignClassAndSubjectRequest $request)
     {
         $currentSession = "2022/2023";
-        $alreadyAssigned = AssignClassAndSubject::where('session', $currentSession)
-            ->where('class_room_id', $request->class_room_id)
-            ->where('subject_id', $request->subject_id)
-            ->first();
+        $alreadyAssigned = AssignClassAndSubject::where([
+            'session' => $currentSession,
+            'class_room_id' => $request->class_room_id,
+            'subject_id' => $request->subject_id,
+            'staff_id' => $request->staff_id
+        ])->first();
+
         if (!$alreadyAssigned) {
             try {
                 $save = AssignClassAndSubject::create($request->validated());
@@ -70,47 +57,26 @@ class AssignClassAndSubjectController extends Controller
             }
         }
 
-        return back()->with('error', 'The selected Class and subject has already been assigned for this session');
+        return back()->with('error', 'The selected Class and subject has already been assigned to this user.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\AssignClassAndSubject  $assignClassAndSubject
-     * @return \Illuminate\Http\Response
-     */
-    public function show(AssignClassAndSubject $assignClassAndSubject)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\AssignClassAndSubject  $assignClassAndSubject
-     * @return \Illuminate\Http\Response
-     */
     public function edit(AssignClassAndSubject $assignClassAndSubject)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateAssignClassAndSubjectRequest  $request
-     * @param  \App\Models\AssignClassAndSubject  $assignClassAndSubject
-     * @return \Illuminate\Http\Response
-     */
     public function update(UpdateAssignClassAndSubjectRequest $request, AssignClassAndSubject $assignClassAndSubject)
     {
         // dd($assignClassAndSubject);
         // dd($request->all());
         $currentSession = "2022/2023";
-        $alreadyAssigned = AssignClassAndSubject::where('session', $currentSession)
-            ->where('class_room_id', $request->class_room_id)
-            ->where('subject_id', $request->subject_id)
-            ->first();
+        $alreadyAssigned = AssignClassAndSubject::where([
+            'session' => $currentSession,
+            'class_room_id' => $request->class_room_id,
+            'subject_id' => $request->subject_id,
+            'staff_id' => $request->staff_id
+        ])->first();
+        
         if (!$alreadyAssigned) {
             try {
                 $update = $assignClassAndSubject->update($request->validated());
@@ -127,14 +93,8 @@ class AssignClassAndSubjectController extends Controller
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\AssignClassAndSubject  $assignClassAndSubject
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(AssignClassAndSubject $assignClassAndSubject)
     {
-        //
+        //before you delete already assigned mk sure it did not appear in result computation table
     }
 }

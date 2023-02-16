@@ -5,28 +5,23 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
+use App\Models\ClassRoom;
+use App\Models\State;
 use App\Models\Student;
 
 class StudentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        return view('dashboard.student.index');
+        $classes = ClassRoom::all();
+        return view('dashboard.student.index', compact('classes'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        $states = State::all();
+        $classes = ClassRoom::all();
+        return view('dashboard.student.create', compact('states', 'classes'));
     }
 
     /**
