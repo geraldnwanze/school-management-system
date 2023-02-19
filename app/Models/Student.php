@@ -24,7 +24,6 @@ class Student extends Model
         'state_id',
         'lga_id',
         'dob',
-        'date_of_entry',
         'year_of_entry',
         'year_of_graduation',
         'class_room_id',

@@ -16,7 +16,7 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="">Current Session</label>
-                                    <input type="text" name="session" value="2022/2023" readonly class="form-control">
+                                    <input type="text" name="session" value="{{$currentSession}}" readonly class="form-control">
                                 </div>
 
                                 <div class="form-group col-md-6">

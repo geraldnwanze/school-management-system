@@ -9,14 +9,12 @@ use App\Models\LGA;
 use App\Models\Staff;
 use App\Models\State;
 use App\Models\User;
+use App\Traits\ApiResponses;
 
 class StaffController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    use ApiResponses;
+
     public function index()
     {
         $data['staffs'] = Staff::orderBy('id', 'DESC')->get();
@@ -39,9 +37,9 @@ class StaffController extends Controller
     {
         $lgas = LGA::where('state_id', $state)->get();
         if(count($lgas) > 0){
-            return response()->json($this->successResponse('successfull', '200', $lgas));
+            return $this->success($lgas, 'lga list', 200);
         }else{
-            return response()->json($this->failureResponse("no record was retrieved", 404, ''));
+            return $this->error('no record was retrieved', 404);
         }
     }
 

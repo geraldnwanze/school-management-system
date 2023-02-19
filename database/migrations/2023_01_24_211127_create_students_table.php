@@ -29,8 +29,7 @@ class CreateStudentsTable extends Migration
             $table->foreign('state_id')->references('id')->on('states');
             $table->unsignedBigInteger('lga_id');
             $table->foreign('lga_id')->references('id')->on('l_g_a_s');
-            $table->string('dob');
-            $table->string('date_of_entry')->nullable();
+            $table->string('dob')->nullable();
             $table->string('year_of_entry')->nullable();
             $table->string('year_of_graduation')->nullable();
             $table->unsignedBigInteger('class_room_id');

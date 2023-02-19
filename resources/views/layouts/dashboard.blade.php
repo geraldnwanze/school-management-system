@@ -132,13 +132,12 @@
                             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                                         class="fa fa-gears"></i><span class="nav-text">School Setup</span></a>
                                 <ul aria-expanded="false">
-                                    <li><a href="#">School Profile</a></li>
+                                    <li><a href="{{route('dashboard.school.profile')}}">School Profile</a></li>
                                     <li><a href="{{ route('dashboard.classes.index') }}">Classes</a></li>
                                     <li><a href="{{ route('dashboard.grades.index') }}">Grade Setup</a></li>
                                     <li><a href="{{ route('dashboard.subjects.index') }}">Subjects</a></li>
                                     <li><a href="{{ route('dashboard.terms.index') }}">Terms</a></li>
                                     <li><a href="{{ route('dashboard.sessions.index') }}">Sessions</a></li>
-                                    <li><a href="#">Set Active Session</a></li>
                                 </ul>
                             </li>
 
@@ -186,7 +185,7 @@
                             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                                         class="fa fa-gears"></i><span class="nav-text">School Setup</span></a>
                                 <ul aria-expanded="false">
-                                    <li><a href="#">School Profile</a></li>
+                                    <li><a href="{{route('dashboard.school.profile')}}">School Profile</a></li>
                                     <li><a href="{{ route('dashboard.classes.index') }}">Classes</a></li>
                                     <li><a href="{{ route('dashboard.grades.index') }}">Grade Setup</a></li>
                                     <li><a href="{{ route('dashboard.subjects.index') }}">Subjects</a></li>
