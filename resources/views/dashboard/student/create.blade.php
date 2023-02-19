@@ -16,17 +16,25 @@
                         <form method="POST" action="{{ route('dashboard.students.create') }}">
                             @csrf
                             <div class="form-row">
-                                <div class="form-group col-md-12">
-
+                                <div class="form-group col-md-6">
+                                    <label>Class</label>
                                     <select class="form-control" name="class_room_id" id="">
                                         <option value=""> --Select Class-- </option>
                                         @foreach ($classes as $class)
                                             <option value="{{ $class->id }}"> {{ $class->name }} </option>
                                         @endforeach
                                     </select>
-                
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Year of entry</label>
+                                    <select name="year_of_entry" id="year_of_entry" class="form-control">
+                                        @for ($i = 2015; $i < 2040; $i++)
+                                            <option value="{{$i}}" {{$year == $i ? 'selected' : ''}}>{{$i}}</option>
+                                        @endfor
+                                    </select>
                                 </div>
                             </div>
+
                             <div class="form-row">
                                 <div class="form-group col-md-4">
                                     <label>Surname</label>
@@ -43,12 +51,8 @@
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-4">
-                                    <label>Email</label>
-                                    <input type="email" name="email" value="{{old('email')}}" class="form-control">
-                                </div>
-                                <div class="form-group col-md-4">
                                     <label>Reg No.</label>
-                                    <input type="text" name="reg_no" value="" class="form-control">
+                                    <input type="text" name="reg_no" id="reg_no" value="" class="form-control">
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label>Gender</label>
@@ -58,35 +62,12 @@
                                         <option value="female">Female</option>
                                     </select>
                                 </div>
-                            </div>
-                            <div class="form-row">
                                 <div class="form-group col-md-4">
                                     <label>date of birth</label>
                                     <input type="date" name="dob" value="" class="form-control">
                                 </div>
-                                <div class="form-group col-md-4">
-                                    <label>date of entry</label>
-                                    <input type="date" name="doe" value="" class="form-control">
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label>Year of entry</label>
-                                    <input type="text" name="yoe" value="{{old('phone_number')}}" class="form-control">
-                                </div>
                             </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-4">
-                                    <label>Password</label>
-                                    <input type="password" name="password" value="" class="form-control" placeholder="*****">
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label>Confirm Password</label>
-                                    <input type="password" name="password_confirmation" value="" class="form-control" placeholder="*****">
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label>Phone</label>
-                                    <input type="text" name="phone_number" value="{{old('phone_number')}}" class="form-control">
-                                </div>
-                            </div>
+                            
                             <div class="form-row">
                                 <div class="form-group col-md-4">
                                     <label>Nationality</label>
@@ -121,6 +102,38 @@
 
     <script>
         $(document).ready(function () {
+            year = $('#year_of_entry').val();
+            $.ajax({
+                type: "GET",
+                url: `/students/reg-no-format`,
+                data: {
+                    year: year
+                },
+                dataType: "Json",
+                success: function (response) {
+                    console.log(response.data)
+                    $('#reg_no').val(response.data)
+                }
+            });
+
+            $('#year_of_entry').change(function (e) { 
+                e.preventDefault();
+                let year = e.target.value
+                $.ajax({
+                    type: "GET",
+                    url: `/students/reg-no-format`,
+                    data: {
+                        year: year
+                    },
+                    dataType: "Json",
+                    success: function (response) {
+                        console.log(response.data)
+                        $('#reg_no').val(response.data)
+                    }
+                });
+
+            });
+
             $('#state').change(function (e) { 
                 e.preventDefault();
                 let state = e.target.value

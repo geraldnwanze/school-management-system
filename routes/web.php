@@ -6,6 +6,7 @@ use App\Http\Controllers\Web\Auth\AuthController;
 use App\Http\Controllers\Web\ClassRoomController;
 use App\Http\Controllers\Web\SessionController;
 use App\Http\Controllers\Web\GradeController;
+use App\Http\Controllers\Web\SchoolProfileController;
 use App\Http\Controllers\Web\StaffController;
 use App\Http\Controllers\Web\StudentController;
 use App\Http\Controllers\Web\SubjectController;
@@ -48,6 +49,11 @@ Route::group(['as' => 'dashboard.', 'middleware' => 'auth'], function () {
         Route::get('/', [StudentController::class, 'index'])->name('index');
     });
 
+    Route::group(['prefix' => 'school-profile', 'as' => 'school.'], function (){
+        Route::get('create', [SchoolProfileController::class, 'createProfile'])->name('profile');
+        Route::post('create', [SchoolProfileController::class, 'storeProfile']);
+    });
+
     Route::group(['prefix' => 'staffs', 'as' => 'staffs.'], function (){
         Route::get('/', [StaffController::class, 'index'])->name('index');
         Route::get('create', [StaffController::class, 'create'])->name('create');
@@ -68,6 +74,8 @@ Route::group(['as' => 'dashboard.', 'middleware' => 'auth'], function () {
         Route::get('/', [StudentController::class, 'index'])->name('index');
         Route::get('create', [StudentController::class, 'create'])->name('create');
         Route::post('create', [StudentController::class, 'store']);
+        Route::get('/reg-no-format', [StudentController::class, 'regNoFormat']);
+
     });
 
     Route::group(['prefix' => 'classes', 'as' => 'classes.'], function () {

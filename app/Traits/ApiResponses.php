@@ -9,7 +9,8 @@ trait ApiResponses
         return response()->json([
             'status' => 'Request was successful',
             'message' => $message,
-            'data' => $data
+            'data' => $data,
+            'statusCode' => $code
         ], $code);
     }
 
@@ -18,6 +19,7 @@ trait ApiResponses
         return response()->json([
             'status' => 'Something went wrong',
             'message' => $message,
+            'statusCode' => $code
         ], $code);
     }
 }

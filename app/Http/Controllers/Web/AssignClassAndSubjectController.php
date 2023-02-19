@@ -9,14 +9,18 @@ use App\Http\Requests\UpdateAssignClassAndSubjectRequest;
 use App\Models\ClassRoom;
 use App\Models\Staff;
 use App\Models\Subject;
+use App\Traits\ActiveSession;
 
 class AssignClassAndSubjectController extends Controller
 {
+    use ActiveSession;
+
     public function index(Staff $staff)
     {
         $data['staff'] = $staff;
         $data['classes'] = ClassRoom::all();
         $data['subjects'] = Subject::all();
+        $data['currentSession'] = $this->activeSession();
         $data['assignedClassAndSubject'] = AssignClassAndSubject::where('staff_id', $staff->id)->get();
         return view('dashboard.staff.assign_class_and_subject', $data);
     }
@@ -26,7 +30,9 @@ class AssignClassAndSubjectController extends Controller
         $staffs = Staff::all();
         $classes = ClassRoom::all();
         $subjects = Subject::all();
-        $assigned = AssignClassAndSubject::with('classRoom', 'subject', 'staff')->paginate(50);
+        $assigned = AssignClassAndSubject::with('classRoom', 'subject', 'staff')
+            ->where('session', $this->activeSession())
+            ->paginate(50);
         return view('dashboard.staff.already_assigned_class_and_subject', compact('assigned', 'staffs', 'classes', 'subjects'));
     }
 
@@ -37,9 +43,8 @@ class AssignClassAndSubjectController extends Controller
 
     public function store(StoreAssignClassAndSubjectRequest $request)
     {
-        $currentSession = "2022/2023";
         $alreadyAssigned = AssignClassAndSubject::where([
-            'session' => $currentSession,
+            'session' => $request->session,
             'class_room_id' => $request->class_room_id,
             'subject_id' => $request->subject_id,
             'staff_id' => $request->staff_id
@@ -69,9 +74,8 @@ class AssignClassAndSubjectController extends Controller
     {
         // dd($assignClassAndSubject);
         // dd($request->all());
-        $currentSession = "2022/2023";
         $alreadyAssigned = AssignClassAndSubject::where([
-            'session' => $currentSession,
+            'session' => $request->session,
             'class_room_id' => $request->class_room_id,
             'subject_id' => $request->subject_id,
             'staff_id' => $request->staff_id
