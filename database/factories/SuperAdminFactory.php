@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class SuperAdminFactory extends Factory
@@ -14,7 +15,10 @@ class SuperAdminFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'role' => User::SUPER_ADMIN,
+            'username' => User::SUPER_ADMIN,
+            'email' => User::SUPER_ADMIN.'@gmail.com',
+            'password' => 123456,
         ];
     }
 }

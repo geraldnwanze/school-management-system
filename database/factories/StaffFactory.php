@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class StaffFactory extends Factory
@@ -14,7 +15,10 @@ class StaffFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'role' => User::STAFF,
+            'username' => 'staff1',
+            'email' => 'staff1@gmail.com',
+            'password' => 123456,
         ];
     }
 }

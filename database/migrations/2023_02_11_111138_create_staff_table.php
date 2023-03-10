@@ -15,23 +15,6 @@ class CreateStaffTable extends Migration
     {
         Schema::create('staff', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->string('surname');
-            $table->string('firstname');
-            $table->string('othername')->nullable();
-            $table->string('email')->unique()->nullable();
-            $table->string('gender');
-            $table->string('phone_number');
-            $table->string('nationality');
-            $table->unsignedBigInteger('state_id');
-            $table->foreign('state_id')->references('id')->on('states');
-            $table->unsignedBigInteger('lga_id');
-            $table->foreign('lga_id')->references('id')->on('l_g_a_s');
-            $table->unsignedBigInteger('created_by');
-            $table->unsignedBigInteger('updated_by');
-            $table->boolean('active')->default(true);
-            $table->softDeletes();
             $table->timestamps();
         });
     }

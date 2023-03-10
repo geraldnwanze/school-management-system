@@ -22,7 +22,7 @@ class AuthController extends Controller
             return redirect()->route('dashboard.'.Auth::user()->role.'.index');            
         }
 
-        return back()->with('error', 'Invalid credentials provided');
+        return back()->with('error', 'Invalid credentials provided')->withInput();
     }
 
     public function logout(Request $request)

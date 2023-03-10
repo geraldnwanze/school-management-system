@@ -1,28 +1,38 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+<script>
+    // Set the options that I want
+toastr.options = {
+  "closeButton": true,
+  "newestOnTop": false,
+  "progressBar": true,
+  "positionClass": "toast-top-right",
+  "preventDuplicates": false,
+  "onclick": null,
+  "showDuration": "300",
+  "hideDuration": "1000",
+  "timeOut": "10000",
+  "extendedTimeOut": "5000",
+  "showEasing": "swing",
+  "hideEasing": "linear",
+  "showMethod": "fadeIn",
+  "hideMethod": "fadeOut"
+}
+</script>
+
 <div>
-    <!-- Walk as if you are kissing the Earth with your feet. - Thich Nhat Hanh -->
     @if ($errors->any())
-    <div class="alert alert-danger" id="errDiv">
         @foreach ($errors->all() as $error)
-        <p> <em>{{$error}}</em> </p>
+            <script>toastr.error("{{ $error }}")</script>
         @endforeach
-    </div>
     @endif
 
     @if (session()->has('error'))
-        <div class="alert alert-danger" id="errDiv">
-            <p> <em>{{ session()->get('error') }}</em> </p>
-        </div>
+        <script>toastr.error("{{ session()->get('error') }}")</script>
     @endif
 
     @if (session()->has('success'))
-        <div class="alert alert-success">
-            <p> <em>{{ session()->get('success') }}</em> </p>
-        </div>
+        <script>toastr.success("{{ session()->get('success') }}")</script>
     @endif
 </div>
-
-<script>
-    setTimeout(() => {
-        $('.alert').css('display', 'none');
-    }, 5000);
-</script>

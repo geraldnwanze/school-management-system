@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ClassRoomHistory>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\School>
  */
-class ClassRoomHistoryFactory extends Factory
+class SchoolFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,7 +17,8 @@ class ClassRoomHistoryFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->name,
+            'address' => $this->faker->address
         ];
     }
 }

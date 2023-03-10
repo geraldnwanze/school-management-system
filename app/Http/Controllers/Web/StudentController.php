@@ -6,16 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
 use App\Models\ClassRoom;
-use App\Models\SchoolProfile;
-use App\Models\State;
 use App\Models\Student;
-use App\Traits\ActiveSession;
 use App\Traits\ApiResponses;
-use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
-    use ActiveSession, ApiResponses;
+    use ApiResponses;
 
     public function index()
     {
@@ -25,31 +21,6 @@ class StudentController extends Controller
 
     public function create()
     {
-        /***
-         * school have to create reg no format
-         * when you create a new student get created reg number format
-         * get count of already created students in db + 1 = current reg no.
-         * use switch case if count < 9 && !== 0 concat 3 zeros
-         * count > 9 && < 100 concat 2 zeros
-         * count greater than >= 100 && less than 1000 concat 1 zero
-         * replace the "reg no" text with current reg no. in the reg no format selected 
-        ***/
-        $data['states'] = State::all();
-        $data['classes'] = ClassRoom::all();
-        $data['year'] = $this->activeYear();
-        return view('dashboard.student.create', $data);
-    }
-
-    public function regNoFormat(Request $request)
-    {
-        $format = SchoolProfile::where('id', 1)->first();
-        $numOfStudents = Student::count();
-        if($numOfStudents >= 0 && $numOfStudents < 9){
-            $nextRegNo = "000".$numOfStudents + 1;
-            $result = str_replace(['year', 'regNo'], [$request->year, $nextRegNo], $format->reg_no_format);
-            return $this->success($result);
-        }
-        
     }
 
     /**
@@ -60,7 +31,7 @@ class StudentController extends Controller
      */
     public function store(StoreStudentRequest $request)
     {
-        dd($request->all());
+       
     }
 
     /**

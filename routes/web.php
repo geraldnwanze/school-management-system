@@ -1,12 +1,11 @@
 <?php
 
+use App\Http\Controllers\web\SchoolController;
 use App\Http\Controllers\Web\AdminController;
-use App\Http\Controllers\Web\AssignClassAndSubjectController;
 use App\Http\Controllers\Web\Auth\AuthController;
 use App\Http\Controllers\Web\ClassRoomController;
 use App\Http\Controllers\Web\SessionController;
 use App\Http\Controllers\Web\GradeController;
-use App\Http\Controllers\Web\SchoolProfileController;
 use App\Http\Controllers\Web\StaffController;
 use App\Http\Controllers\Web\StudentController;
 use App\Http\Controllers\Web\SubjectController;
@@ -25,16 +24,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'welcome');
+Route::redirect('/', 'auth/login');
 
-Route::group(['as' => 'auth.'], function () {
+Route::group(['as' => 'auth.', 'prefix' => 'auth'], function () {
     Route::view('login', 'auth.login')->name('login-page');
     Route::post('login', [AuthController::class, 'login'])->name('login');
 });
 
 Route::group(['as' => 'dashboard.', 'middleware' => 'auth'], function () {
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
-    Route::get('/get-lga/{state}', [StaffController::class, 'getLGA']);
 
     Route::group(['prefix' => 'superadmin', 'as' => 'superadmin.', 'middleware' => ['superadmin']], function () {
         Route::get('/', [SuperAdminController::class, 'index'])->name('index');
@@ -49,9 +47,12 @@ Route::group(['as' => 'dashboard.', 'middleware' => 'auth'], function () {
         Route::get('/', [StudentController::class, 'index'])->name('index');
     });
 
-    Route::group(['prefix' => 'school-profile', 'as' => 'school.'], function (){
-        Route::get('create', [SchoolProfileController::class, 'createProfile'])->name('profile');
-        Route::post('create', [SchoolProfileController::class, 'storeProfile']);
+    Route::group(['prefix' => 'school', 'as' => 'school.'], function () {
+        Route::get('/', [SchoolController::class, 'index'])->name('index');
+        Route::get('create', [SchoolController::class, 'create'])->name('create');
+        Route::post('store', [SchoolController::class, 'store'])->name('store');
+        Route::get('{school}/edit', [SchoolController::class, 'edit'])->name('edit');
+        Route::patch('{school}/update', [SchoolController::class, 'update'])->name('update');
     });
 
     Route::group(['prefix' => 'staffs', 'as' => 'staffs.'], function (){
@@ -61,20 +62,6 @@ Route::group(['as' => 'dashboard.', 'middleware' => 'auth'], function () {
         Route::get('{staff}/edit', [StaffController::class, 'edit'])->name('edit');
         Route::patch('{staff}/update', [StaffController::class, 'update'])->name('update');
         Route::delete('{staff}/delete', [StaffController::class, 'destroy'])->name('delete');
-
-        //assign class and subject
-        Route::get('{staff}/assign-class-subject', [AssignClassAndSubjectController::class, 'index'])->name('assignSubject');
-        Route::post('assign-class-subject', [AssignClassAndSubjectController::class, 'store'])->name('saveAssigned');
-        Route::patch('edit-assigned-class-subject/{assignClassAndSubject}', [AssignClassAndSubjectController::class, 'update'])->name('updateAssigned');
-        Route::get('already-assigned', [AssignClassAndSubjectController::class, 'alreadyAssigned'])->name('alreadyAssigned');
-
-    });
-
-    Route::group(['prefix' => 'students', 'as' => 'students.'], function(){
-        Route::get('/', [StudentController::class, 'index'])->name('index');
-        Route::get('create', [StudentController::class, 'create'])->name('create');
-        Route::post('create', [StudentController::class, 'store']);
-        Route::get('/reg-no-format', [StudentController::class, 'regNoFormat']);
 
     });
 

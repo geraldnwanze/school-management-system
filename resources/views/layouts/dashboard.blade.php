@@ -121,23 +121,28 @@
                     </li>
 
                         @if (superadmin())
+                        <li>
+                            <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                                <i class="fa fa-gears"></i><span class="nav-text">Setup</span>
+                            </a>
+                            <ul aria-expanded="false">
+                                <li><a href="{{ route('dashboard.school.index') }}">School</a></li>
+                                <li><a href="#">Classrooms</a></li>
+                                <li><a href="#">Subjects</a></li>
+                                <li><a href="#">Grades</a></li>
+                                <li><a href="#">Active Session</a></li>
+                                <li><a href="#">Teachers to Subjects</a></li>
+                                <li><a href="#">Subjects to Classes</a></li>
+                                <li><a href="#">Teachers to Classes</a></li>
+                            </ul>
+                        </li>
+
                             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                                         class="fa fa-users"></i><span class="nav-text">Users</span></a>
                                 <ul aria-expanded="false">
+                                    <li><a href="#">Admin</a></li>
                                     <li><a href="{{route('dashboard.staff.index')}}">Staff</a></li>
                                     <li><a href="{{route('dashboard.student.index')}}">Student</a></li>
-                                </ul>
-                            </li>
-
-                            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-                                        class="fa fa-gears"></i><span class="nav-text">School Setup</span></a>
-                                <ul aria-expanded="false">
-                                    <li><a href="{{route('dashboard.school.profile')}}">School Profile</a></li>
-                                    <li><a href="{{ route('dashboard.classes.index') }}">Classes</a></li>
-                                    <li><a href="{{ route('dashboard.grades.index') }}">Grade Setup</a></li>
-                                    <li><a href="{{ route('dashboard.subjects.index') }}">Subjects</a></li>
-                                    <li><a href="{{ route('dashboard.terms.index') }}">Terms</a></li>
-                                    <li><a href="{{ route('dashboard.sessions.index') }}">Sessions</a></li>
                                 </ul>
                             </li>
 
@@ -173,63 +178,6 @@
 
                         @endif
 
-                        @if (admin())
-                            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-                                        class="fa fa-users"></i><span class="nav-text">Users</span></a>
-                                <ul aria-expanded="false">
-                                    <li><a href="{{route('dashboard.staff.index')}}">Staff</a></li>
-                                    <li><a href="{{route('dashboard.student.index')}}">Student</a></li>
-                                </ul>
-                            </li>
-
-                            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-                                        class="fa fa-gears"></i><span class="nav-text">School Setup</span></a>
-                                <ul aria-expanded="false">
-                                    <li><a href="{{route('dashboard.school.profile')}}">School Profile</a></li>
-                                    <li><a href="{{ route('dashboard.classes.index') }}">Classes</a></li>
-                                    <li><a href="{{ route('dashboard.grades.index') }}">Grade Setup</a></li>
-                                    <li><a href="{{ route('dashboard.subjects.index') }}">Subjects</a></li>
-                                    <li><a href="{{ route('dashboard.terms.index') }}">Terms</a></li>
-                                    <li><a href="{{ route('dashboard.sessions.index') }}">Sessions</a></li>
-                                    <li><a href="#">Set Active Session</a></li>
-                                </ul>
-                            </li>
-                        @endif
-
-                        @if (staff())
-                            <li>
-                                <a class="" href="#" aria-expanded="false"><i class="fa fa-user"></i><span
-                                        class="nav-text">Staff Profile</span></a>
-                            </li>
-                            <li>
-                                <a class="" href="#" aria-expanded="false"><i class="fa fa-list"></i><span
-                                        class="nav-text">View Subjects</span></a>
-                            </li>
-                            <li>
-                                <a class="" href="#" aria-expanded="false"><i class="fa fa-edit"></i><span
-                                        class="nav-text">Enter Result</span></a>
-                            </li>
-                        @endif
-
-                        @if (student())
-                            <li>
-                                <a class="" href="#" aria-expanded="false"><i class="fa fa-user"></i><span
-                                        class="nav-text">Student Profile</span></a>
-                            </li>
-                            <li>
-                                <a class="" href="#" aria-expanded="false"><i class="fa fa-list"></i><span
-                                        class="nav-text">Check Result</span></a>
-                            </li>
-                        @endif
-
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-                        class="fa fa-wrench"></i><span class="nav-text">Settings</span></a>
-                        <ul aria-expanded="false">
-                            <li><a href="#">Password</a></li>
-                        </ul>
-                    </li>
-
                     </ul>
                 @endauth
             </div>
@@ -239,7 +187,7 @@
 
         <div class="content-body">
             <div class="container-fluid">
-                <x-alert />
+                
                 @yield('content')
             </div>
         </div>
@@ -302,5 +250,7 @@
     <script src="{{ asset('dashboard/js/dashboard/dashboard-1.js') }}"></script>
 
 </body>
+
+<x-alert />
 
 </html>

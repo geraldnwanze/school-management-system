@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\School;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class AssignClassAndSubjectSeeder extends Seeder
+class SchoolSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +15,6 @@ class AssignClassAndSubjectSeeder extends Seeder
      */
     public function run()
     {
-        //
+        School::factory()->create();
     }
 }

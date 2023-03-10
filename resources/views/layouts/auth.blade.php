@@ -12,8 +12,9 @@
 
 </head>
 
+
+
 <body class="h-100">
-    <x-alert/>
     @yield('content')
 
     <!--**********************************
@@ -24,5 +25,7 @@
     <script src="{{asset('dashboard/js/quixnav-init.js')}}"></script>
     <!--endRemoveIf(production)-->
 </body>
+
+<x-alert/>
 
 </html>

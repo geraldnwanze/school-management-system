@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\SuperAdmin;
 use Illuminate\Database\Seeder;
 
 class SuperAdminSeeder extends Seeder
@@ -13,6 +14,6 @@ class SuperAdminSeeder extends Seeder
      */
     public function run()
     {
-        //
+        SuperAdmin::factory()->create();
     }
 }
